@@ -26,16 +26,61 @@ public class Simulation : MonoBehaviour
     [SerializeField] 
     private float TopSpeed = 300;
 
+    public float RaceDistance = 900f;
+    private float DistanceTraveled;
+
     [SerializeField] 
     private float FuelWeight = 1;
     [SerializeField] 
     private float WheelsWeight = 4;
+
+    public float WheelsFix;
 
     private float FuelIncrement;
     private float WheelsIncrement;
 
     [SerializeField] 
     private float DecreasingTime = 100;
+
+    private bool PitStop = false;
+
+    private bool WantsStop = false;
+
+    public void WheelRepair()
+    {
+        if (!PitStop)
+        {
+            return;
+        }
+        WheelDurability += WheelsFix;
+        if (WheelDurability >= InitialValue)
+            WheelDurability = InitialValue;
+
+        UIManager.UIManagerInstance.UpdateWheels(WheelDurability);
+    }
+
+    public void FuelRefil(float FuelRefix)
+    {
+        if (!PitStop)
+        {
+            return;
+        }
+        FuelAmount += FuelRefix;
+        if (FuelAmount >= InitialValue)
+            FuelAmount = InitialValue;
+
+        UIManager.UIManagerInstance.UpdateFuel(FuelAmount);
+    }
+
+    public void PitStopCall(bool state)
+    {
+        WantsStop = state;
+        if (PitStop)
+        {
+            PitStop = false;
+        }
+
+    }
 
     void Awake()
     {
@@ -63,14 +108,41 @@ public class Simulation : MonoBehaviour
         UIManager.UIManagerInstance.InitializeUI(InitialValue,InitialValue,InitialValue);
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            PitStopCall(!PitStop);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            WheelRepair();
+        }
+    if (PitStop) {
+
+            return;
+                 }
+
         if (FuelAmount <= 0 || EngineHeat >= InitialValue)
         {
             Speed -= DecreasingTime * Time.deltaTime;
             Speed = Mathf.Clamp(Speed - DecreasingTime * Time.deltaTime, BaseSpeed, TopSpeed);
-            Debug.Log(Speed);
+
+            DistanceTraveled += Speed * Time.deltaTime;
+
+            if (DistanceTraveled > RaceDistance)
+            {
+                DistanceTraveled -= RaceDistance;
+                if (WantsStop)
+                {
+                    PitStop = true;
+                    WheelsFix = (InitialValue - WheelDurability) / 4;
+                    WantsStop = false;
+                }
+            }
+
+            UIManager.UIManagerInstance.FindPoint(DistanceTraveled / RaceDistance);
+
             return;
         }
         if (WheelDurability <= 0)
@@ -83,7 +155,7 @@ public class Simulation : MonoBehaviour
 
             UIManager.UIManagerInstance.UpdateWheels(WheelDurability);
         }
-
+       
         if (FuelAmount <= 0)
         {
             FuelAmount = 0;
@@ -107,9 +179,20 @@ public class Simulation : MonoBehaviour
         }
 
         Speed = BaseSpeed + ((1 / (FuelAmount + 5)) * FuelIncrement) + ((WheelDurability / InitialValue) * WheelsIncrement);
-        Debug.Log(Speed);
-
         
+        DistanceTraveled += Speed * Time.deltaTime;
+        if (DistanceTraveled > RaceDistance)
+        {
+            DistanceTraveled -= RaceDistance;
+            if (WantsStop)
+            { 
+                PitStop = true;
+                WheelsFix = (InitialValue - WheelDurability) / 4;
+                WantsStop = false;
+            }
+        }
+
+        UIManager.UIManagerInstance.FindPoint(DistanceTraveled / RaceDistance);
     }
    
 }

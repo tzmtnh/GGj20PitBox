@@ -134,9 +134,9 @@ GameObject:
   - component: {fileID: 3590496}
   - component: {fileID: 3590495}
   - component: {fileID: 3590500}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RedThing
-  m_TagString: Untagged
+  m_TagString: RedThing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,16 +238,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3590494}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 920b63db3bfdaea49be470ef2cc1fc8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockHeight: 50
+  lockHeight: 2
   lockIfNotDrag: 0
   redThing: 1
   wheal: 0
   fuel: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &39078488
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +569,26 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   wheal: {fileID: 6340531169778515046, guid: 4f0018cc65cfeb546a60dc717db91a8c, type: 3}
+  jackMax: 1
+  jackMin: 0.1
+--- !u!114 &277804957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277804952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbb56e9112f90843983a9743c51fefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 768
+  whealHeight: -0.1
+  RedThingHeight: 1.5
 --- !u!1 &343887367
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,7 +989,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534568383}
   m_LocalRotation: {x: -0, y: -0, z: 0.0000000074505797, w: 1}
-  m_LocalPosition: {x: 5.266, y: 2.96, z: -4.660001}
+  m_LocalPosition: {x: 0.85, y: 2.96, z: -4.660001}
   m_LocalScale: {x: 1.0602403, y: 0.7240237, z: 1.4786501}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1042,7 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde999d1555513d40aeaee33f159c4fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posWheal: 0
+  itsOk: 0
 --- !u!1 &583215860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,7 +1231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde999d1555513d40aeaee33f159c4fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posWheal: 0
+  itsOk: 0
 --- !u!1 &805567583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,10 +1246,9 @@ GameObject:
   - component: {fileID: 805567588}
   - component: {fileID: 805567585}
   - component: {fileID: 805567592}
-  - component: {fileID: 805567591}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Wheal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1313,7 +1335,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805567583}
   serializedVersion: 2
-  m_Mass: 90
+  m_Mass: 5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -1321,23 +1343,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &805567591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805567583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920b63db3bfdaea49be470ef2cc1fc8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockHeight: 50
-  lockIfNotDrag: 1
-  redThing: 1
-  wheal: 0
-  fuel: 0
 --- !u!114 &805567592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1456,7 +1461,8 @@ GameObject:
   - component: {fileID: 965658825}
   - component: {fileID: 965658824}
   - component: {fileID: 965658823}
-  m_Layer: 0
+  - component: {fileID: 965658827}
+  m_Layer: 8
   m_Name: road
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1536,6 +1542,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &965658827
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965658822}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1036572610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1550,10 +1572,9 @@ GameObject:
   - component: {fileID: 1036572615}
   - component: {fileID: 1036572612}
   - component: {fileID: 1036572619}
-  - component: {fileID: 1036572618}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Wheal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1648,23 +1669,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1036572618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1036572610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920b63db3bfdaea49be470ef2cc1fc8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockHeight: 50
-  lockIfNotDrag: 1
-  redThing: 1
-  wheal: 0
-  fuel: 0
 --- !u!114 &1036572619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1842,7 +1846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde999d1555513d40aeaee33f159c4fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posWheal: 0
+  itsOk: 0
 --- !u!1 &1275329611
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,7 +2140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde999d1555513d40aeaee33f159c4fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posWheal: 0
+  itsOk: 0
 --- !u!1 &2058289482
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,10 +2155,9 @@ GameObject:
   - component: {fileID: 2058289487}
   - component: {fileID: 2058289484}
   - component: {fileID: 2058289491}
-  - component: {fileID: 2058289490}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Wheal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2249,23 +2252,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2058289490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058289482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920b63db3bfdaea49be470ef2cc1fc8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockHeight: 50
-  lockIfNotDrag: 1
-  redThing: 1
-  wheal: 0
-  fuel: 0
 --- !u!114 &2058289491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2389,10 +2375,9 @@ GameObject:
   - component: {fileID: 2146731336}
   - component: {fileID: 2146731333}
   - component: {fileID: 2146731340}
-  - component: {fileID: 2146731339}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Wheal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2487,23 +2472,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2146731339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146731331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920b63db3bfdaea49be470ef2cc1fc8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lockHeight: 50
-  lockIfNotDrag: 1
-  redThing: 1
-  wheal: 0
-  fuel: 0
 --- !u!114 &2146731340
 MonoBehaviour:
   m_ObjectHideFlags: 0

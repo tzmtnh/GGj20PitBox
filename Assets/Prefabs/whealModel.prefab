@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3634231375908771505}
   - component: {fileID: 2657042569926143992}
   - component: {fileID: 918342300912598733}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: whealModel
   m_TagString: Wheal
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d52f48c6b4bb734b862de923af233eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theyAreNew: 0
+  theyAreNew: 1
   fixedInPlace: 0
 --- !u!114 &918342300912598733
 MonoBehaviour:
@@ -144,6 +144,9 @@ MonoBehaviour:
   redThing: 0
   wheal: 1
   fuel: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &6713739786610748593
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +159,7 @@ GameObject:
   - component: {fileID: 5231769903803294724}
   - component: {fileID: 6516887098410796761}
   - component: {fileID: 2434117478309437067}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
