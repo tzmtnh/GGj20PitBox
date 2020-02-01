@@ -11,8 +11,6 @@ public class NewMouseDrag : MonoBehaviour
     public float whealHeight;
     public float RedThingHeight;
 
-    private float height;
-
 
     // Start is called before the first frame update
     void Start()
