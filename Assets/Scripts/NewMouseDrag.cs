@@ -34,6 +34,13 @@ public class NewMouseDrag : MonoBehaviour
         }
     }
 
+	Vector3 GetPointOnGrid(Ray ray, float gridHeight) {
+		Plane grid = new Plane(Vector3.up, new Vector3(0, gridHeight, 0));
+		float enter;
+		grid.Raycast(ray, out enter);
+		return ray.origin + ray.direction * enter;
+	}
+
     void Update()
     {
 		bool isLeftMouseButtonPressed = Input.GetMouseButton(0);
@@ -76,7 +83,7 @@ public class NewMouseDrag : MonoBehaviour
             {
                 if (selected == null)
                 {
-                    if (	hit.transform.tag == "Wheal" ||
+                    if (hit.transform.tag == "Wheal" ||
 					    hit.transform.tag == "RedThing" ||
 						hit.transform.tag == "Gas")
                     {
@@ -86,15 +93,20 @@ public class NewMouseDrag : MonoBehaviour
                 }
 
 				if (selected != null) {
+					Rigidbody rb = selected.GetComponent<Rigidbody>();
+
+					float gridHeight = 0;
 					if (selected.tag == "Wheal") {
-						selected.transform.position = new Vector3(hit.point.x, whealHeight, hit.point.z);
+						gridHeight = whealHeight;
 					} else if (selected.tag == "RedThing") {
-						selected.transform.position = new Vector3(hit.point.x, RedThingHeight, hit.point.z);
+						gridHeight = RedThingHeight;
 					} else if (selected.tag == "Gas") {
-						selected.transform.position = new Vector3(hit.point.x, gasHeight, hit.point.z);
+						gridHeight = gasHeight;
 					}
+
+					rb.position = GetPointOnGrid(ray, gridHeight);
 				}
-            }
+			}
         }
         else if(selected != null && _waitForMouseRelease == false)
         {
