@@ -179,6 +179,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: 2
-  drag: 0.6
+  drag: 0.1
   zoomRange: {x: 2, y: 5, z: 3}
   zoomSensitivity: 10
