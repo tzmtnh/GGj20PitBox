@@ -10,6 +10,7 @@ TagManager:
   - RedThing
   - Gas
   - WheelMesh
+  - CarEngineArea
   layers:
   - Default
   - TransparentFX

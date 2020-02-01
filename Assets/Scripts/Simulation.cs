@@ -12,42 +12,50 @@ public class Simulation : MonoBehaviour
         }
     }
 
-    private float WheelDurability;
-    private float FuelAmount;
-    private float EngineHeat;
+    private float _wheelDurability;
+    private float _fuelAmount;
+    private float _engineHeat;
     [SerializeField] 
-    private int InitialValue = 100;
-    private int InitialValueEngine = 0;
+    private int _initialValue = 100;
+    private int _initialValueEngine = 0;
     [SerializeField] 
-    private float DecayRate = 5;
+    private float _decayRate = 5;
 
-    private float Speed;
+    [SerializeField] private float _engineLowHeatingRate = 7;
+    [SerializeField] private float _engineMedHeatingRate = 11;
+    [SerializeField] private float _engineHighHeatingRate = 15;
+
+    [SerializeField] private float _engineMedThreshold = 50;
+    [SerializeField] private float _engineHighThreshold = 75;
+
+    [SerializeField] private float __enginePitCoolingRate = 3;
+    [SerializeField] private float __engineSlowPitCoolingRate = 2;
+
+    private float _speed;
     [SerializeField] 
-    private float BaseSpeed = 15;
+    private float _baseSpeed = 15;
     [SerializeField] 
-    private float TopSpeed = 300;
+    private float _topSpeed = 300;
 
-    public float RaceDistance = 900f;
-    private float DistanceTraveled;
-
-    [SerializeField] 
-    private float FuelWeight = 1;
-    [SerializeField] 
-    private float WheelsWeight = 4;
-
-    public float WheelsFix;
-    public float EngineFix;
-
-    private float FuelIncrement;
-    private float WheelsIncrement;
+    public float _raceDistance = 900f;
+    private float _distanceTraveled;
 
     [SerializeField] 
-    private float DecreasingTime = 100;
+    private float _fuelWeight = 1;
+    [SerializeField] 
+    private float _wheelsWeight = 4;
 
-    [SerializeField]
-    private bool PitStop = true;
-    [SerializeField]
-    private bool WantsStop = false;
+    public float _wheelsFix;
+    public float _engineFix;
+
+    private float _fuelIncrement;
+    private float _wheelsIncrement;
+
+    [SerializeField] 
+    private float _decreasingTime = 100;
+
+    private bool _pitStop = true;
+    private bool _wantsStop = false;
 
     private bool _gameStarted = false;
 
@@ -63,6 +71,11 @@ public class Simulation : MonoBehaviour
 
     [SerializeField] private Car _car;
     [SerializeField] private NewMouseDrag _mouseDrag;
+
+    public bool EngineCanCoolOff()
+    {
+        return _engineHeat > _engineMedThreshold;
+    }
 
     public bool HasGameStarted()
     {
@@ -81,50 +94,50 @@ public class Simulation : MonoBehaviour
 
     public void WheelRepair()
     {
-        if (!PitStop)
+        if (!_pitStop)
         {
             return;
         }
-        WheelDurability += WheelsFix;
-        if (WheelDurability >= InitialValue)
-            WheelDurability = InitialValue;
+        _wheelDurability += _wheelsFix;
+        if (_wheelDurability >= _initialValue)
+            _wheelDurability = _initialValue;
 
-        UIManager.UIManagerInstance.UpdateWheels(WheelDurability);
+        UIManager.UIManagerInstance.UpdateWheels(_wheelDurability);
     }
 
     public void FuelRefil(float _amount)
     {
-        if (!PitStop)
+        if (!_pitStop)
         {
             return;
         }
-        FuelAmount += _amount;
-        if (FuelAmount >= InitialValue)
-            FuelAmount = InitialValue;
+        _fuelAmount += _amount;
+        if (_fuelAmount >= _initialValue)
+            _fuelAmount = _initialValue;
 
-        UIManager.UIManagerInstance.UpdateFuel(FuelAmount);
+        UIManager.UIManagerInstance.UpdateFuel(_fuelAmount);
     }
 
-    public void EngineRepair()
+    public void EngineRepair(float _amount)
     {
-        if (!PitStop)
+        if (!_pitStop)
         {
             return;
         }
-        EngineHeat += EngineFix;
-        if (EngineHeat <= InitialValueEngine)
-            EngineHeat = InitialValueEngine;
+        _engineHeat -= _amount;
+        if (_engineHeat <= _initialValueEngine)
+            _engineHeat = _initialValueEngine;
 
-        UIManager.UIManagerInstance.UpdateEngine(EngineHeat);
+        UIManager.UIManagerInstance.UpdateEngine(_engineHeat);
     }
 
     public void PitStopCall(bool state)
     {
-        WantsStop = state;
-        if (PitStop)
+        _wantsStop = state;
+        if (_pitStop)
         {
-            PitStop = false;
-            WantsStop = false;
+            _pitStop = false;
+            _wantsStop = false;
             _mouseDrag.Reset(); 
             _car.ExitPit();
         }
@@ -144,17 +157,17 @@ public class Simulation : MonoBehaviour
 
         float increment;
 
-        WheelDurability = InitialValue;
-        FuelAmount = InitialValue;
-        EngineHeat = InitialValueEngine;
+        _wheelDurability = _initialValue;
+        _fuelAmount = _initialValue;
+        _engineHeat = _initialValueEngine;
 
-        increment = (TopSpeed - BaseSpeed) / (FuelWeight + WheelsWeight);
-        WheelsIncrement = increment * WheelsWeight;
-        FuelIncrement = increment * FuelWeight;
+        increment = (_topSpeed - _baseSpeed) / (_fuelWeight + _wheelsWeight);
+        _wheelsIncrement = increment * _wheelsWeight;
+        _fuelIncrement = increment * _fuelWeight;
 
-        Speed = TopSpeed;
+        _speed = _topSpeed;
 
-        UIManager.UIManagerInstance.InitializeUI(InitialValue,InitialValue,InitialValue);
+        UIManager.UIManagerInstance.InitializeUI(_initialValue,_initialValue,_initialValue);
 
         UIManager.UIManagerInstance.UpdateLaps(_lapsElapsed + 1, _totalLaps);
     }
@@ -168,7 +181,7 @@ public class Simulation : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            PitStopCall(!PitStop);
+            PitStopCall(!_pitStop);
             _gameStarted = true;
         }
 
@@ -180,72 +193,95 @@ public class Simulation : MonoBehaviour
         _timeElapsed += _timeDilation * Time.deltaTime;
         UIManager.UIManagerInstance.UpdateTimer(_timeElapsed);
 
-    if (PitStop) {
+        if (_pitStop)
+        {
+            if (_engineHeat >= _engineHighThreshold)
+            {
+                return;
+            }
+            else if(_engineHeat >=_engineMedThreshold)
+            {
+                EngineRepair(__engineSlowPitCoolingRate);
+            }
+            else
+            {
+                EngineRepair(__engineSlowPitCoolingRate);
+            }
 
             return;
-                 }
+        }
 
-        if (FuelAmount <= 0 || EngineHeat >= InitialValue)
+        if (_fuelAmount <= 0 || _engineHeat >= _initialValue)
         {
-            Speed -= DecreasingTime * Time.deltaTime;
-            Speed = Mathf.Clamp(Speed - DecreasingTime * Time.deltaTime, BaseSpeed, TopSpeed);
+            _speed -= _decreasingTime * Time.deltaTime;
+            _speed = Mathf.Clamp(_speed - _decreasingTime * Time.deltaTime, _baseSpeed, _topSpeed);
 
-            DistanceTraveled += Speed * Time.deltaTime;
+            _distanceTraveled += _speed * Time.deltaTime;
 
-            if (DistanceTraveled > RaceDistance)
+            if (_distanceTraveled > _raceDistance)
             {
-                DistanceTraveled -= RaceDistance;
-                if (WantsStop)
+                _distanceTraveled -= _raceDistance;
+                if (_wantsStop)
                 {
-                    PitStop = true;
-                    WheelsFix = (InitialValue - WheelDurability) / 4;
-                    EngineFix = -8;
-                    WantsStop = false;
+                    _pitStop = true;
+                    _wheelsFix = (_initialValue - _wheelDurability) / 4;
+                    _engineFix = -8;
+                    _wantsStop = false;
                     _car.EnterPit();
                 }
             }
 
-            UIManager.UIManagerInstance.FindPoint(DistanceTraveled / RaceDistance);
+            UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);
 
             return;
         }
-        if (WheelDurability <= 0)
+        if (_wheelDurability <= 0)
         {
-            WheelDurability = 0;
+            _wheelDurability = 0;
         }
         else
         {
-            WheelDurability -= DecayRate * Time.deltaTime;
+            _wheelDurability -= _decayRate * Time.deltaTime;
 
-            UIManager.UIManagerInstance.UpdateWheels(WheelDurability);
+            UIManager.UIManagerInstance.UpdateWheels(_wheelDurability);
         }
        
-        if (FuelAmount <= 0)
+        if (_fuelAmount <= 0)
         {
-            FuelAmount = 0;
+            _fuelAmount = 0;
         }
         else
         {
-            FuelAmount -= DecayRate * Time.deltaTime;
+            _fuelAmount -= _decayRate * Time.deltaTime;
 
-            UIManager.UIManagerInstance.UpdateFuel(FuelAmount);
+            UIManager.UIManagerInstance.UpdateFuel(_fuelAmount);
         }
 
-        if (EngineHeat >= InitialValue)
+        if (_engineHeat >= _initialValue)
         {
-            EngineHeat = InitialValue;
+            _engineHeat = _initialValue;
         }
         else
         {
-            EngineHeat += DecayRate * Time.deltaTime;
-
-            UIManager.UIManagerInstance.UpdateEngine(EngineHeat);
+            if (_engineHeat >= _engineHighThreshold)
+            {
+                _engineHeat += _engineHighHeatingRate * Time.deltaTime;
+            }
+            else if (_engineHeat >= _engineMedThreshold)
+            {
+                _engineHeat += _engineMedHeatingRate * Time.deltaTime;
+            }
+            else
+            {
+                _engineHeat += _engineLowHeatingRate * Time.deltaTime;
+            }
+            UIManager.UIManagerInstance.UpdateEngine(_engineHeat);
         }
 
-        Speed = BaseSpeed + ((1 / (FuelAmount + 5)) * FuelIncrement) + ((WheelDurability / InitialValue) * WheelsIncrement);
+        _speed = _baseSpeed + ((1 / (_fuelAmount + 5)) * _fuelIncrement) + ((_wheelDurability / _initialValue) * _wheelsIncrement);
         
-        DistanceTraveled += Speed * Time.deltaTime;
-        if (DistanceTraveled >= RaceDistance)
+        _distanceTraveled += _speed * Time.deltaTime;
+        if (_distanceTraveled >= _raceDistance)
         {
             _lapsElapsed++;
             if (_lapsElapsed == _totalLaps)
@@ -255,18 +291,18 @@ public class Simulation : MonoBehaviour
             }
 
             UIManager.UIManagerInstance.UpdateLaps(_lapsElapsed+1,_totalLaps);
-            DistanceTraveled -= RaceDistance;
-            if (WantsStop)
+            _distanceTraveled -= _raceDistance;
+            if (_wantsStop)
             { 
-                PitStop = true;
-                WheelsFix = (InitialValue - WheelDurability) / 4;
-                EngineFix = -8;
-                WantsStop = false;
+                _pitStop = true;
+                _wheelsFix = (_initialValue - _wheelDurability) / 4;
+                _engineFix = -8;
+                _wantsStop = false;
                 _car.EnterPit();
             }
         }
 
-        UIManager.UIManagerInstance.FindPoint(DistanceTraveled / RaceDistance);
+        UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);
     }
    
 }
