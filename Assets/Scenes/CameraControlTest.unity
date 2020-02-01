@@ -170,12 +170,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &248554518 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 248554518, guid: 3c9053f59e4191644ad068ea183ecea5,
-    type: 3}
-  m_PrefabInstance: {fileID: 6666868430543342699}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &280980106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,26 +1039,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 248554518, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
-      propertyPath: ShapeModule.arc.value
-      value: 360
-      objectReference: {fileID: 0}
-    - target: {fileID: 248554518, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 248554518, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 248554519, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.473
-      objectReference: {fileID: 0}
-    - target: {fileID: 248554519, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.29
-      objectReference: {fileID: 0}
     - target: {fileID: 712788285621859338, guid: 3c9053f59e4191644ad068ea183ecea5,
         type: 3}
       propertyPath: inSpline
@@ -1075,11 +1049,6 @@ PrefabInstance:
       propertyPath: outSpline
       value: 
       objectReference: {fileID: 135176575}
-    - target: {fileID: 712788285621859338, guid: 3c9053f59e4191644ad068ea183ecea5,
-        type: 3}
-      propertyPath: dust
-      value: 
-      objectReference: {fileID: 248554518}
     - target: {fileID: 6101909947087901035, guid: 3c9053f59e4191644ad068ea183ecea5,
         type: 3}
       propertyPath: m_Name
@@ -1149,16 +1118,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3074154894765028606, guid: bbcf13cc8eaf2d7468e8909725a96adb,
-        type: 3}
-      propertyPath: m_TagString
-      value: Gas
-      objectReference: {fileID: 0}
-    - target: {fileID: 3074154894765028606, guid: bbcf13cc8eaf2d7468e8909725a96adb,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 6701603486856470940, guid: bbcf13cc8eaf2d7468e8909725a96adb,
         type: 3}
       propertyPath: m_Name
@@ -1217,11 +1176,6 @@ PrefabInstance:
     - target: {fileID: 7735980219085853583, guid: bbcf13cc8eaf2d7468e8909725a96adb,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8410287219398372988, guid: bbcf13cc8eaf2d7468e8909725a96adb,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
