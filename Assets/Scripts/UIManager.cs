@@ -32,13 +32,16 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void InitializeUI(float wheelsMaxValue, float fuelMaxValue, float engineMaxValue)
     {
+        _wheelsSlider.maxValue = wheelsMaxValue;
+        _fuelSlider.maxValue = fuelMaxValue;
+        _engineSlider.maxValue = engineMaxValue;
+
         _wheelsSlider.value = _wheelsSlider.maxValue;
         _fuelSlider.value = _fuelSlider.maxValue;
-        _engineSlider.value = _engineSlider.maxValue;
+        _engineSlider.value = 0;
     }
-
 
 
 

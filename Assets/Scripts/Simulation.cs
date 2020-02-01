@@ -17,18 +17,24 @@ public class Simulation : MonoBehaviour
     private float EngineHeat;
     [SerializeField] 
     private int InitialValue = 100;
+    [SerializeField] 
     private float DecayRate = 5;
 
     private float Speed;
+    [SerializeField] 
     private float BaseSpeed = 15;
+    [SerializeField] 
     private float TopSpeed = 300;
 
+    [SerializeField] 
     private float FuelWeight = 1;
+    [SerializeField] 
     private float WheelsWeight = 4;
 
     private float FuelIncrement;
     private float WheelsIncrement;
 
+    [SerializeField] 
     private float DecreasingTime = 100;
 
     void Awake()
@@ -54,6 +60,7 @@ public class Simulation : MonoBehaviour
 
         Speed = TopSpeed;
 
+        UIManager.UIManagerInstance.InitializeUI(InitialValue,InitialValue,InitialValue);
     }
 
     // Update is called once per frame
