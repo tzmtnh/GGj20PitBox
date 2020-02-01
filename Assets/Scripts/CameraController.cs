@@ -37,7 +37,12 @@ public class CameraController : MonoBehaviour
 	}
 
 	void Update() {
-		if (Input.GetMouseButtonDown(1)) {
+        if (!Simulation.SimulationInst.IsGameRunning())
+        {
+            return;
+        }
+
+        if (Input.GetMouseButtonDown(1)) {
 			_lastPos = Input.mousePosition;
 		}
 

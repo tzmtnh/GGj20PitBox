@@ -12,6 +12,11 @@ public class WhealBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Simulation.SimulationInst.IsGameRunning())
+        {
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0)){
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

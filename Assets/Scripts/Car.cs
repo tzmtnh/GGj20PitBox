@@ -71,7 +71,12 @@ public class Car : MonoBehaviour
 	}
 	
 	void Update() {
-		float dt = Time.deltaTime;
+        if (!Simulation.SimulationInst.IsGameRunning())
+        {
+            return;
+        }
+
+        float dt = Time.deltaTime;
 		Vector3 pos = _transform.position;
 		Vector3 delta = pos - _lastPos;
 		float dist = delta.magnitude;
