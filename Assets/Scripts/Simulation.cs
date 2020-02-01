@@ -64,6 +64,11 @@ public class Simulation : MonoBehaviour
         return _gameRunning;
     }
 
+    public void Stop(bool State)
+    {
+        _gameRunning = State;
+    }
+
     public void WheelRepair()
     {
         if (!PitStop)
