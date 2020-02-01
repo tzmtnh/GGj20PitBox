@@ -59,13 +59,16 @@ public class Car : MonoBehaviour
 		_followSplineCo = null;
 	}
 
-	void Awake() {
-		_transform = transform;
-		_steer = _transform.Find("Steer");
-		_frontWheels = _steer.Find("FrontWheels");
-		_rearWheels = _transform.Find("RearWheels");
-
-		EnterPit();
+    void Awake()
+    {
+        _transform = transform;
+        _steer = _transform.Find("Steer");
+        _frontWheels = _steer.Find("FrontWheels");
+        _rearWheels = _transform.Find("RearWheels");
+    }
+    void Start()
+    { 
+        EnterPit();
 	}
 	
 	void Update() {
