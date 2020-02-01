@@ -28,7 +28,7 @@ public class NewMouseDrag : MonoBehaviour
 
     public void Reset()
     {
-        for (int i = 0; i >= 3; i++)
+        for (int i = 0; i <= 3; i++)
         {
             _wheelsMoved[i] = false;
         }
@@ -74,6 +74,11 @@ public class NewMouseDrag : MonoBehaviour
                                     .theyAreNew = false;
                             }
                         }
+                    }
+                    else if (hit.transform.tag == "WhealBox")
+                    {
+                        Instantiate(wheal, hit.transform.position+hit.transform.forward*3, wheal.transform.rotation).GetComponent<WhealStatus>()
+                            .theyAreNew = true;
                     }
                 }
             }

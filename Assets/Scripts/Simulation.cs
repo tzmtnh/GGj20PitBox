@@ -62,6 +62,7 @@ public class Simulation : MonoBehaviour
     private float _timeDilation = 1;
 
     [SerializeField] private Car _car;
+    [SerializeField] private NewMouseDrag _mouseDrag;
 
     public bool HasGameStarted()
     {
@@ -124,6 +125,7 @@ public class Simulation : MonoBehaviour
         {
             PitStop = false;
             WantsStop = false;
+            _mouseDrag.Reset(); 
             _car.ExitPit();
         }
 
