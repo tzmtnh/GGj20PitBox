@@ -310,9 +310,9 @@ GameObject:
   - component: {fileID: 9091355194662486907}
   - component: {fileID: 8410287219398372988}
   - component: {fileID: 4499180996829642846}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Handle
-  m_TagString: Untagged
+  m_TagString: Gas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248554516}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -2.1400008, z: 0}
+  m_LocalPosition: {x: 0, y: -2.473, z: 0.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1956534667}
@@ -284,8 +284,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.2
+      scalar: 0.7
+      minScalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -4796,6 +4796,7 @@ GameObject:
   - component: {fileID: 6121505882544298837}
   - component: {fileID: 2980035020247704304}
   - component: {fileID: 3505666868496204048}
+  - component: {fileID: 7138051110449310967}
   m_Layer: 0
   m_Name: GasLid
   m_TagString: Untagged
@@ -4876,6 +4877,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.2
   m_Center: {x: 0.000000029802322, y: -0.00000023841858, z: -0.019610671}
+--- !u!114 &7138051110449310967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211210085381294910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398d39d5fec0455499476ea3f68f2b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1420932104146884184
 GameObject:
   m_ObjectHideFlags: 0
@@ -5835,7 +5848,7 @@ MonoBehaviour:
   animationDuration: 3
   inSpline: {fileID: 0}
   outSpline: {fileID: 0}
-  dust: {fileID: 0}
+  dust: {fileID: 248554518}
 --- !u!1 &6632833076556106805
 GameObject:
   m_ObjectHideFlags: 0

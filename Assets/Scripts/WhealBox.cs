@@ -20,7 +20,7 @@ public class WhealBox : MonoBehaviour
             {
                 if(hit.transform.tag == "WhealBox")
                 {
-                    Instantiate(wheal, hit.transform.position, wheal.transform.rotation).GetComponent<WhealStatus>().Spawn();
+                    Instantiate(wheal, hit.transform.position, wheal.transform.rotation).GetComponent<WhealStatus>().theyAreNew=true;
                 }
             }
         }
