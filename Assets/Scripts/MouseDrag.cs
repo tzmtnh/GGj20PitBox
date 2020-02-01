@@ -8,6 +8,11 @@ public class MouseDrag : MonoBehaviour
 
     public float lockHeight;
     public bool lockIfNotDrag;
+
+    public bool redThing;
+    public bool wheal;
+    public bool fuel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,11 +21,15 @@ public class MouseDrag : MonoBehaviour
 
     private void Update()
     {
-        if (lockIfNotDrag && !GetComponent<WhealStatus>().theyAreNew)
+        if (wheal)
         {
-            rb.isKinematic = true;
-        }
+            if (lockIfNotDrag && !GetComponent<WhealStatus>().theyAreNew)
 
+            {
+                rb.isKinematic = true;
+            }
+
+        }
     }
 
     private void OnMouseDrag()
@@ -31,13 +40,27 @@ public class MouseDrag : MonoBehaviour
 
         if (transform.position.z >= lockHeight)
         {
-            if (!GetComponent<WhealStatus>().fixedInPlace)
+            if (wheal)
+            {
+                if (!GetComponent<WhealStatus>().fixedInPlace)
+                    transform.position = new Vector3(objPosition.x, lockHeight, objPosition.z);
+
+            }else if (redThing)
+            {
                 transform.position = new Vector3(objPosition.x, lockHeight, objPosition.z);
+            }
         }
         else
         {
-            if (!GetComponent<WhealStatus>().fixedInPlace)
+            if (wheal)
+            {
+                if (!GetComponent<WhealStatus>().fixedInPlace)
+                    transform.position = objPosition;
+            }
+            else if (redThing)
+            {
                 transform.position = objPosition;
+            }
         }
 
         
@@ -47,9 +70,16 @@ public class MouseDrag : MonoBehaviour
 
     private void OnMouseUp()
     {
-       if(!GetComponent<WhealStatus>().fixedInPlace)
-        rb.isKinematic = false;
- 
+        if (wheal)
+        {
+            if (!GetComponent<WhealStatus>().fixedInPlace)
+                rb.isKinematic = false;
+        }
+        else if (redThing)
+        {
+            rb.isKinematic = false;
+        }
+
         lockIfNotDrag = false;
     }
 }

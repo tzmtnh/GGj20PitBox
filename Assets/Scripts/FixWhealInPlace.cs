@@ -14,7 +14,7 @@ public class FixWhealInPlace : MonoBehaviour
     {
         if (other.tag == "Wheal")
         {
-
+            other.transform.parent = transform;
             other.transform.position = transform.position;
             other.transform.rotation = transform.rotation;
             other.GetComponent<WhealStatus>().fixedInPlace = true;
