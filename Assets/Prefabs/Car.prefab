@@ -5123,8 +5123,9 @@ GameObject:
   - component: {fileID: 9217213086941600353}
   - component: {fileID: 8690796247344999438}
   - component: {fileID: 1851928480}
-  - component: {fileID: 1851928479}
   - component: {fileID: 6865340663407033023}
+  - component: {fileID: 1851928479}
+  - component: {fileID: 1997479154581687293}
   m_Layer: 9
   m_Name: RLWheel
   m_TagString: WheelMesh
@@ -5205,6 +5206,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.3023576
   m_Center: {x: 0.31774867, y: 0.0000008195642, z: -0.00000017881399}
+--- !u!135 &6865340663407033023
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2179071033127857617}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3023576
+  m_Center: {x: 0.31774867, y: 0.0000008195642, z: -0.00000017881399}
 --- !u!54 &1851928479
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5221,7 +5235,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &6865340663407033023
+--- !u!135 &1997479154581687293
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5328,9 +5342,10 @@ GameObject:
   - component: {fileID: 158077609132021502}
   - component: {fileID: 2963949718709756454}
   - component: {fileID: 8001210881041350727}
+  - component: {fileID: 708596000}
   m_Layer: 0
   m_Name: Engine
-  m_TagString: Untagged
+  m_TagString: CarEngineArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5395,6 +5410,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &708596000
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2562397015324756517}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.89, y: 0.79, z: 0.60766697}
+  m_Center: {x: -0.00000059604645, y: -0.000001013279, z: 0.17646062}
 --- !u!1 &3424582766636039198
 GameObject:
   m_ObjectHideFlags: 0
@@ -5410,6 +5438,8 @@ GameObject:
   - component: {fileID: 105068643}
   - component: {fileID: 6137798431827688807}
   - component: {fileID: 714972805047378336}
+  - component: {fileID: 3416879356895171077}
+  - component: {fileID: 1391644267015371474}
   m_Layer: 0
   m_Name: RLBrake
   m_TagString: Untagged
@@ -5532,6 +5562,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itsOk: 0
   _isInverted: 1
+--- !u!135 &3416879356895171077
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3424582766636039198}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0.06, y: 0, z: 0}
+--- !u!114 &1391644267015371474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3424582766636039198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde999d1555513d40aeaee33f159c4fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itsOk: 0
+  _isInverted: 1
 --- !u!1 &4496878011883414028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5625,6 +5682,8 @@ GameObject:
   - component: {fileID: 105068639}
   - component: {fileID: 4123397890817615262}
   - component: {fileID: 7087875835981503894}
+  - component: {fileID: 6954467470062989009}
+  - component: {fileID: 3925716094509151518}
   m_Layer: 0
   m_Name: FLBrake
   m_TagString: Untagged
@@ -5734,6 +5793,33 @@ SphereCollider:
   m_Radius: 0.3
   m_Center: {x: 0.07, y: 0, z: 0}
 --- !u!114 &7087875835981503894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559926505229736743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde999d1555513d40aeaee33f159c4fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itsOk: 0
+  _isInverted: 1
+--- !u!135 &6954467470062989009
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559926505229736743}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0.07, y: 0, z: 0}
+--- !u!114 &3925716094509151518
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10699,7 +10785,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7130622200361395064}
   - component: {fileID: 900452594866621954}
-  - component: {fileID: 5465195708339670888}
+  - component: {fileID: 105068628}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -10750,7 +10836,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5465195708339670888
+--- !u!114 &105068628
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10874,6 +10960,8 @@ GameObject:
   - component: {fileID: 105068641}
   - component: {fileID: 8777863734977509108}
   - component: {fileID: 4144705275099023537}
+  - component: {fileID: 3223972206772570251}
+  - component: {fileID: 6831086674761258020}
   m_Layer: 0
   m_Name: RRBrake
   m_TagString: Untagged
@@ -10996,6 +11084,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itsOk: 0
   _isInverted: 0
+--- !u!135 &3223972206772570251
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6632833076556106805}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: -0.07, y: 0, z: 0}
+--- !u!114 &6831086674761258020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6632833076556106805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde999d1555513d40aeaee33f159c4fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itsOk: 0
+  _isInverted: 0
 --- !u!1 &7120066027448584936
 GameObject:
   m_ObjectHideFlags: 0
@@ -11008,8 +11123,9 @@ GameObject:
   - component: {fileID: 6866333907031292348}
   - component: {fileID: 1983909226800561682}
   - component: {fileID: 2139977444}
-  - component: {fileID: 2139977443}
   - component: {fileID: 7975655976952013495}
+  - component: {fileID: 2139977443}
+  - component: {fileID: 890229506170860845}
   m_Layer: 9
   m_Name: FRWheel
   m_TagString: WheelMesh
@@ -11090,6 +11206,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.3023576
   m_Center: {x: -0.25, y: 0, z: 0}
+--- !u!135 &7975655976952013495
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7120066027448584936}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3023576
+  m_Center: {x: -0.25, y: 0, z: 0}
 --- !u!54 &2139977443
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11106,7 +11235,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &7975655976952013495
+--- !u!135 &890229506170860845
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11134,6 +11263,8 @@ GameObject:
   - component: {fileID: 105068637}
   - component: {fileID: 3598674848162646064}
   - component: {fileID: 3699169560870127931}
+  - component: {fileID: 3793627364804051186}
+  - component: {fileID: 5384740343494803469}
   m_Layer: 0
   m_Name: FRBrake
   m_TagString: Untagged
@@ -11256,6 +11387,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itsOk: 0
   _isInverted: 0
+--- !u!135 &3793627364804051186
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342008757322438287}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: -0.05, y: 0, z: 0}
+--- !u!114 &5384740343494803469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7342008757322438287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cde999d1555513d40aeaee33f159c4fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itsOk: 0
+  _isInverted: 0
 --- !u!1 &7956544510798868762
 GameObject:
   m_ObjectHideFlags: 0
@@ -11300,8 +11458,9 @@ GameObject:
   - component: {fileID: 6630398909474415637}
   - component: {fileID: 5870787011940367285}
   - component: {fileID: 480947231}
-  - component: {fileID: 480947230}
   - component: {fileID: 302418356742936576}
+  - component: {fileID: 480947230}
+  - component: {fileID: 1566715665629264052}
   m_Layer: 9
   m_Name: RRWheel
   m_TagString: WheelMesh
@@ -11382,6 +11541,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.3023576
   m_Center: {x: -0.3, y: 0, z: 0}
+--- !u!135 &302418356742936576
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8717281213899363972}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3023576
+  m_Center: {x: -0.3, y: 0, z: 0}
 --- !u!54 &480947230
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11398,7 +11570,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &302418356742936576
+--- !u!135 &1566715665629264052
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11423,8 +11595,9 @@ GameObject:
   - component: {fileID: 2457860451636129471}
   - component: {fileID: 6687294151131686786}
   - component: {fileID: 963940854}
-  - component: {fileID: 963940853}
   - component: {fileID: 8398827267927298172}
+  - component: {fileID: 963940853}
+  - component: {fileID: 8025587386223254959}
   m_Layer: 9
   m_Name: FLWheel
   m_TagString: WheelMesh
@@ -11505,6 +11678,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.3023576
   m_Center: {x: 0.23, y: 0, z: 0}
+--- !u!135 &8398827267927298172
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8912899909672621595}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3023576
+  m_Center: {x: 0.23, y: 0, z: 0}
 --- !u!54 &963940853
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11521,7 +11707,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &8398827267927298172
+--- !u!135 &8025587386223254959
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
