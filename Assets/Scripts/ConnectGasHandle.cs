@@ -6,6 +6,8 @@ public class ConnectGasHandle : MonoBehaviour
 {
 	public static ConnectGasHandle inst;
 
+	Transform _anchor;
+
 	bool _connected = false;
 	public bool connected { get { return _connected; } }
 
@@ -15,6 +17,7 @@ public class ConnectGasHandle : MonoBehaviour
 
 	void Awake() {
 		inst = this;
+		_anchor = transform.Find("Anchor");
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -23,15 +26,16 @@ public class ConnectGasHandle : MonoBehaviour
 		if (_connected) return;
 		if (other.tag != "Gas") return;
 
-        other.transform.position = transform.position;
-        other.transform.rotation = transform.rotation;
+        other.transform.position = _anchor.position;
+        other.transform.rotation = _anchor.rotation;
         other.GetComponent<Rigidbody>().isKinematic = true;
 		
 		NewMouseDrag.inst.WaitForMouseRelease();
 
         _connected = true;
 		_canConnect = false;
-    }
+
+	}
 
 	void OnTriggerExit(Collider other) {
 		if (_connected == false) return;
@@ -44,7 +48,7 @@ public class ConnectGasHandle : MonoBehaviour
 	void Update() {
         if (_connected)
         {
-            Simulation.SimulationInst.FuelRefil(_fuelPerSecond*Time.deltaTime);
+			Simulation.SimulationInst.FuelRefil(_fuelPerSecond*Time.deltaTime);
         }
 
         if (_canConnect == false && _connected == false && Input.GetMouseButtonUp(0)) {
