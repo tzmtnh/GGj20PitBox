@@ -29,17 +29,23 @@ public class NewMouseDrag : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 1000, layerMask))
             {
-                if (selected == null && (	hit.transform.tag == "Wheal" ||
-											hit.transform.tag == "RedThing" ||
-											hit.transform.tag == "Gas"))
-                {
-                    selected = hit.transform.gameObject;
+                if (selected == null)
+                { 
+                    if(	hit.transform.tag == "Wheal" ||
+					    hit.transform.tag == "RedThing" ||
+						hit.transform.tag == "Gas")
+                    {
+                        selected = hit.transform.gameObject;
+                    }
+                    else if (hit.transform.tag=="WheelMesh")
+                    {
+
+                    }
                 }
 
-                if (selected != null && selected.tag == "Wheal" && selected.GetComponent<WhealStatus>()._canMove)
+
+                if (selected != null && selected.tag == "Wheal")
                 { 
-                    selected.transform.parent = null;
-                    selected.GetComponent<Rigidbody>().isKinematic = false;
                     selected.transform.position = new Vector3(hit.point.x, whealHeight, hit.point.z);
                 }
                 if (selected != null && (selected.tag == "RedThing" ||  selected.tag == "Gas"))
