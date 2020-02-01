@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class FixWhealInPlace : MonoBehaviour
 {
-    public bool itsOk;
+    public bool itsOk = false;
+
+    [SerializeField] private bool _isInverted;
     // Update is called once per frame
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!itsOk)
+        if (transform.childCount > 0)
+        {
+            return;
+        }
+
+        if (itsOk)
         {
             if (other.tag == "Wheal")
             {
@@ -19,9 +26,13 @@ public class FixWhealInPlace : MonoBehaviour
                     other.transform.parent = transform;
                     other.transform.position = transform.position;
                     other.transform.rotation = transform.rotation;
+                    if (_isInverted)
+                    {
+                        other.transform.Rotate(0, 0, 180);
+                    }
                     other.GetComponent<WhealStatus>().fixedInPlace = true;
                     other.GetComponent<Rigidbody>().isKinematic = true;
-                    itsOk = true;
+                    itsOk = false;
                 }
 
             }

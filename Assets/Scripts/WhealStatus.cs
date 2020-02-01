@@ -8,9 +8,18 @@ public class WhealStatus : MonoBehaviour
     public bool theyAreNew;
     public bool fixedInPlace;
 
-    private void Start()
+    public void TurnKinematicTrue()
+    {
+
+        GetComponent<Rigidbody>().isKinematic = false;
+
+    }
+
+    public void Spawn()
     {
         GetComponent<Rigidbody>().isKinematic = false;
+        theyAreNew = true;
+        fixedInPlace = false;
     }
 
 

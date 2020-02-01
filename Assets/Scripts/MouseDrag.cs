@@ -40,6 +40,7 @@ public class MouseDrag : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100, 8))
             {
+                transform.parent = null;
                 transform.position = new Vector3(hit.point.x, lockHeight, hit.point.z);
                 Debug.Log(hit.point);
             }
