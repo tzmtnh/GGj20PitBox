@@ -106,6 +106,7 @@ public class NewMouseDrag : MonoBehaviour
 					} else if (selected.tag == "RedThing") {
 						gridHeight = RedThingHeight;
 					} else if (selected.tag == "Gas") {
+						rb.isKinematic = true;
 						gridHeight = gasHeight;
 					}
 
@@ -120,7 +121,9 @@ public class NewMouseDrag : MonoBehaviour
                 selected.GetComponent<Rigidbody>().isKinematic = true;
                 selected.GetComponent<Rigidbody>().isKinematic = false;
                 selected = null;
-            }
+            } if (selected.tag == "Gas" && ConnectGasHandle.inst.connected == false) {
+				selected.GetComponent<Rigidbody>().isKinematic = false;
+			}
             else
             {
                 selected = null;

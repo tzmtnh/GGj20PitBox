@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class ConnectGasHandle : MonoBehaviour
 {
+	public static ConnectGasHandle inst;
+
 	bool _connected = false;
+	public bool connected { get { return _connected; } }
+
 	bool _canConnect = true;
     [SerializeField]
     private float _fuelPerSecond = 30;
+
+	void Awake() {
+		inst = this;
+	}
 
 	void OnTriggerEnter(Collider other)
     {
