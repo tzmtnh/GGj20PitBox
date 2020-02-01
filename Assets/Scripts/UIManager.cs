@@ -25,15 +25,17 @@ public class UIManager : MonoBehaviour
         get { return _uiManagerInst; }
     }
 
-    private Vector3 FindPoint(float completionPercent)
+    public void FindPoint(float completionPercent)
     {
         if (_lapPath.Length < 1)
         {
-            return Vector3.zero;
+            _carDisplay.rectTransform.localPosition = Vector3.zero;
+            return;
         }
         else if (_lapPath.Length < 2)
         {
-            return _lapPath[0].localPosition;
+            _carDisplay.rectTransform.localPosition = _lapPath[0].localPosition;
+            return;
         }
 
 
@@ -51,9 +53,11 @@ public class UIManager : MonoBehaviour
                 continue;
             }
 
-            return Vector3.Lerp(currentPoint, nextPoint, dist / currentDistance);
+             _carDisplay.rectTransform.localPosition = Vector3.Lerp(currentPoint, nextPoint, dist / currentDistance);
+            return;
         }
-        return _lapPath[_lapPath.Length - 1].localPosition;
+        _carDisplay.rectTransform.localPosition = _lapPath[_lapPath.Length - 1].localPosition;
+        return;
     }
 
     private void Awake()
@@ -85,18 +89,6 @@ public class UIManager : MonoBehaviour
             lastPoint = point;
         }
 
-    }
-
-    private float test;
-
-    private void Update()
-    {
-        test += Time.deltaTime;
-        _carDisplay.rectTransform.localPosition = FindPoint(test);
-        if (test > 1)
-        {
-            test = test - 1;
-        }
     }
 
     public void InitializeUI(float wheelsMaxValue, float fuelMaxValue, float engineMaxValue)
