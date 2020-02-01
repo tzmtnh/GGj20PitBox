@@ -125,15 +125,13 @@ public class NewMouseDrag : MonoBehaviour
             {
                 selected.GetComponent<Rigidbody>().isKinematic = true;
                 selected.GetComponent<Rigidbody>().isKinematic = false;
-                selected = null;
             } if (selected.tag == "Gas" && ConnectGasHandle.inst.connected == false) {
 				selected.GetComponent<Rigidbody>().isKinematic = false;
 			}
-            else
-            {
-                selected = null;
-            }
-        }
+
+			selected = null;
+
+		}
 
 		if (_waitForMouseRelease && isLeftMouseButtonPressed == false) {
 			_waitForMouseRelease = false;
