@@ -12,6 +12,7 @@ public class GasPump : MonoBehaviour
 	void SetupTube() {
 		Rigidbody parentRB = null;
 		Transform root = bones[0].parent;
+
 		if (root != null) {
 			parentRB = root.gameObject.GetComponent<Rigidbody>();
 			if (parentRB == null) {
@@ -36,9 +37,9 @@ public class GasPump : MonoBehaviour
 			
 			Rigidbody rb = t.gameObject.AddComponent<Rigidbody>();
 			rb.useGravity = true;
-			rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+			rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
 			rb.detectCollisions = false;
-			
+
 			ConfigurableJoint joint = rb.gameObject.AddComponent<ConfigurableJoint>();
 			joint.connectedBody = parentRB;
 			joint.axis = Vector3.forward;
@@ -49,8 +50,10 @@ public class GasPump : MonoBehaviour
 			joint.angularXMotion = ConfigurableJointMotion.Free;
 			joint.angularYMotion = ConfigurableJointMotion.Free;
 			joint.angularZMotion = ConfigurableJointMotion.Free;
-			//joint.enableCollision = true;
+			joint.enableCollision = false;
 			joint.rotationDriveMode = RotationDriveMode.Slerp;
+			joint.autoConfigureConnectedAnchor = true;
+			joint.enablePreprocessing = false;
 
 			var slerpDrive = joint.slerpDrive;
 			slerpDrive.maximumForce = Mathf.Infinity;

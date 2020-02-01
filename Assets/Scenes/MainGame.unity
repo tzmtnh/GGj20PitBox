@@ -1521,6 +1521,14 @@ PrefabInstance:
       propertyPath: _wheels.Array.data[3]
       value: 
       objectReference: {fileID: 2139977440}
+    - target: {fileID: 879721401, guid: b1471929dc2eb014ea2dc70f8e4e39b5, type: 3}
+      propertyPath: RedThingHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 879721401, guid: b1471929dc2eb014ea2dc70f8e4e39b5, type: 3}
+      propertyPath: gasHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5017991103407399453, guid: b1471929dc2eb014ea2dc70f8e4e39b5,
         type: 3}
       propertyPath: m_LocalPosition.x
