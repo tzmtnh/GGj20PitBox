@@ -179,6 +179,8 @@ public class Simulation : MonoBehaviour
             return;
         }
 
+        Car.inst.fireStrength = ((_engineHeat * 2) - 100) / 100;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             PitStopCall(!_pitStop);

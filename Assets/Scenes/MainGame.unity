@@ -301,6 +301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 712788285621859338, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
+    - {fileID: 5465195708339670888, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
 --- !u!1 &105068627 stripped
 GameObject:
@@ -321,9 +322,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationDuration: 3
+  fireStrength: 0
   inSpline: {fileID: 1445993516}
   outSpline: {fileID: 794595294}
   dust: {fileID: 60498627}
+  fire: {fileID: 105068629}
+--- !u!198 &105068629 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 211398182981170248, guid: 3c9053f59e4191644ad068ea183ecea5,
+    type: 3}
+  m_PrefabInstance: {fileID: 105068626}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &105068630 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7342008757322438287, guid: 3c9053f59e4191644ad068ea183ecea5,
