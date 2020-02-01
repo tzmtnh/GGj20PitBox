@@ -9,6 +9,7 @@ TagManager:
   - Jack
   - RedThing
   - Gas
+  - WheelMesh
   layers:
   - Default
   - TransparentFX
