@@ -10699,7 +10699,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7130622200361395064}
   - component: {fileID: 900452594866621954}
-  - component: {fileID: 105068628}
   - component: {fileID: 5465195708339670888}
   m_Layer: 0
   m_Name: Car
@@ -10751,24 +10750,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &105068628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6101909947087901035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf41e50c319a67d479e61cc6632f0c32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationDuration: 3
-  fireStrength: 0
-  inSpline: {fileID: 0}
-  outSpline: {fileID: 0}
-  dust: {fileID: 248554518}
-  fire: {fileID: 211398182981170248}
 --- !u!114 &5465195708339670888
 MonoBehaviour:
   m_ObjectHideFlags: 0
