@@ -31,6 +31,7 @@ public class FixWhealInPlace : MonoBehaviour
                         other.transform.Rotate(0, 0, 180);
                     }
                     other.GetComponent<WhealStatus>().fixedInPlace = true;
+                    other.GetComponent<WhealStatus>()._canMove = false;
                     other.GetComponent<Rigidbody>().isKinematic = true;
                     itsOk = false;
                 }

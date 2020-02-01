@@ -35,7 +35,7 @@ public class NewMouseDrag : MonoBehaviour
                     selected = hit.transform.gameObject;
                 }
 
-                if (selected != null && selected.tag == "Wheal" && !selected.GetComponent<WhealStatus>().fixedInPlace)
+                if (selected != null && selected.tag == "Wheal" && selected.GetComponent<WhealStatus>()._canMove)
                 { 
                     selected.transform.parent = null;
                     selected.GetComponent<Rigidbody>().isKinematic = false;

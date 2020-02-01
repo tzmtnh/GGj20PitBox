@@ -7,6 +7,7 @@ public class WhealStatus : MonoBehaviour
 
     public bool theyAreNew;
     public bool fixedInPlace;
+    public bool _canMove=true;
 
     public void TurnKinematicTrue()
     {
@@ -20,6 +21,7 @@ public class WhealStatus : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = false;
         theyAreNew = true;
         fixedInPlace = false;
+        _canMove = true;
     }
 
 
