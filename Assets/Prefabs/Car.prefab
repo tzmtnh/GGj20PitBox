@@ -4795,6 +4795,7 @@ GameObject:
   - component: {fileID: 3216699836436407798}
   - component: {fileID: 6121505882544298837}
   - component: {fileID: 2980035020247704304}
+  - component: {fileID: 3505666868496204048}
   m_Layer: 0
   m_Name: GasLid
   m_TagString: Untagged
@@ -4862,6 +4863,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &3505666868496204048
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211210085381294910}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0.000000029802322, y: -0.00000023841858, z: -0.019610671}
 --- !u!1 &1420932104146884184
 GameObject:
   m_ObjectHideFlags: 0

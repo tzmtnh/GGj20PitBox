@@ -29,8 +29,9 @@ public class NewMouseDrag : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 1000, layerMask))
             {
-                if (selected == null && hit.transform.tag == "Wheal" ||
-                    selected == null && hit.transform.tag == "RedThing")
+                if (selected == null && (	hit.transform.tag == "Wheal" ||
+											hit.transform.tag == "RedThing" ||
+											hit.transform.tag == "Gas"))
                 {
                     selected = hit.transform.gameObject;
                 }
@@ -41,7 +42,7 @@ public class NewMouseDrag : MonoBehaviour
                     selected.GetComponent<Rigidbody>().isKinematic = false;
                     selected.transform.position = new Vector3(hit.point.x, whealHeight, hit.point.z);
                 }
-                if (selected != null && selected.tag == "RedThing")
+                if (selected != null && (selected.tag == "RedThing" ||  selected.tag == "Gas"))
                     selected.transform.position = new Vector3(hit.point.x, RedThingHeight, hit.point.z);
             }
         }
