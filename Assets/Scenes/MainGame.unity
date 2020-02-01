@@ -96,7 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-  m_LightingDataAsset: {fileID: 112000000, guid: 010029395983755459486ccdfead8977,
+  m_LightingDataAsset: {fileID: 112000000, guid: 02bc4e0f4f7e15249adf5bf341ff238a,
     type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -140,6 +140,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101909947087901035, guid: 3c9053f59e4191644ad068ea183ecea5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7130622200361395064, guid: 3c9053f59e4191644ad068ea183ecea5,
         type: 3}
