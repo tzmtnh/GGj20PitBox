@@ -36,7 +36,6 @@ public class Simulation : MonoBehaviour
     private float WheelsWeight = 4;
 
     public float WheelsFix;
-    public float FuelRefix;
     public float EngineFix;
 
     private float FuelIncrement;
@@ -45,9 +44,12 @@ public class Simulation : MonoBehaviour
     [SerializeField] 
     private float DecreasingTime = 100;
 
-    private bool PitStop = false;
-
+    [SerializeField]
+    private bool PitStop = true;
+    [SerializeField]
     private bool WantsStop = false;
+
+    private bool _gameStarted = false;
 
     [SerializeField]
     private int _totalLaps = 30;
@@ -58,6 +60,8 @@ public class Simulation : MonoBehaviour
     private float _timeElapsed = 0;
     [SerializeField]
     private float _timeDilation = 1;
+
+    [SerializeField] private Car _car;
 
     public bool IsGameRunning()
     {
@@ -77,13 +81,13 @@ public class Simulation : MonoBehaviour
         UIManager.UIManagerInstance.UpdateWheels(WheelDurability);
     }
 
-    public void FuelRefil()
+    public void FuelRefil(float _amount)
     {
         if (!PitStop)
         {
             return;
         }
-        FuelAmount += FuelRefix;
+        FuelAmount += _amount;
         if (FuelAmount >= InitialValue)
             FuelAmount = InitialValue;
 
@@ -109,6 +113,8 @@ public class Simulation : MonoBehaviour
         if (PitStop)
         {
             PitStop = false;
+            WantsStop = false;
+            _car.ExitPit();
         }
 
     }
@@ -148,25 +154,19 @@ public class Simulation : MonoBehaviour
             return;
         }
 
-        _timeElapsed += _timeDilation * Time.deltaTime;
-        UIManager.UIManagerInstance.UpdateTimer(_timeElapsed);
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             PitStopCall(!PitStop);
+            _gameStarted = true;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+
+        if (!_gameStarted)
         {
-            WheelRepair();
+            return;
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            FuelRefil();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            EngineRepair();
-        }
+
+        _timeElapsed += _timeDilation * Time.deltaTime;
+        UIManager.UIManagerInstance.UpdateTimer(_timeElapsed);
 
     if (PitStop) {
 
@@ -187,9 +187,9 @@ public class Simulation : MonoBehaviour
                 {
                     PitStop = true;
                     WheelsFix = (InitialValue - WheelDurability) / 4;
-                    FuelRefix = 5;
                     EngineFix = -8;
                     WantsStop = false;
+                    _car.EnterPit();
                 }
             }
 
@@ -233,7 +233,7 @@ public class Simulation : MonoBehaviour
         Speed = BaseSpeed + ((1 / (FuelAmount + 5)) * FuelIncrement) + ((WheelDurability / InitialValue) * WheelsIncrement);
         
         DistanceTraveled += Speed * Time.deltaTime;
-        if (DistanceTraveled > RaceDistance)
+        if (DistanceTraveled >= RaceDistance)
         {
             _lapsElapsed++;
             if (_lapsElapsed == _totalLaps)
@@ -248,9 +248,9 @@ public class Simulation : MonoBehaviour
             { 
                 PitStop = true;
                 WheelsFix = (InitialValue - WheelDurability) / 4;
-                FuelRefix = 5;
                 EngineFix = -8;
                 WantsStop = false;
+                _car.EnterPit();
             }
         }
 

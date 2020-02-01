@@ -6,6 +6,8 @@ public class ConnectGasHandle : MonoBehaviour
 {
 	bool _connected = false;
 	bool _canConnect = true;
+    [SerializeField]
+    private float _fuelPerSecond = 30;
 
 	void OnTriggerEnter(Collider other)
     {
@@ -32,7 +34,12 @@ public class ConnectGasHandle : MonoBehaviour
 	}
 
 	void Update() {
-		if (_canConnect == false && _connected == false && Input.GetMouseButtonUp(0)) {
+        if (_connected)
+        {
+            Simulation.SimulationInst.FuelRefil(_fuelPerSecond*Time.deltaTime);
+        }
+
+        if (_canConnect == false && _connected == false && Input.GetMouseButtonUp(0)) {
 			_canConnect = true;
 		}
 	}

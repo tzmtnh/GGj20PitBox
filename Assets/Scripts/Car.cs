@@ -29,13 +29,12 @@ public class Car : MonoBehaviour
 
 	const float WHEEL_RADIUS = 0.35f;
 
-	void EnterPit() {
+	public void EnterPit() {
 		FollowSpline(animationDuration, inSpline);
 	}
 
-	void ExitPit() {
+	public void ExitPit() {
 		FollowSpline(animationDuration, outSpline);
-		Invoke("EnterPit", animationDuration + 3);
 	}
 
 	void FollowSpline(float duration, BezierSegment segment) {
@@ -72,10 +71,6 @@ public class Car : MonoBehaviour
 	}
 	
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.Space)) {
-			ExitPit();
-		}
-
 		float dt = Time.deltaTime;
 		Vector3 pos = _transform.position;
 		Vector3 delta = pos - _lastPos;
