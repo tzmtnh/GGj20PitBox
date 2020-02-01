@@ -7,6 +7,7 @@ public class Car : MonoBehaviour
 	public float animationDuration = 3;
 	public BezierSegment inSpline;
 	public BezierSegment outSpline;
+	public ParticleSystem dust;
 
 	Vector3 _velocity;
 	public Vector3 velocity { get { return _velocity; } }
@@ -106,5 +107,8 @@ public class Car : MonoBehaviour
 
 		_velocity = delta / dt;
 		_lastPos = pos;
+
+		var emission = dust.emission;
+		emission.rateOverTimeMultiplier = Mathf.Min(_velocity.magnitude, 1) * 50;
 	}
 }
