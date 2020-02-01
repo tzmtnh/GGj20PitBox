@@ -29,6 +29,8 @@ public class Simulation : MonoBehaviour
     private float FuelIncrement;
     private float WheelsIncrement;
 
+    private float DecreasingTime = 100;
+
     void Awake()
     {
         if (SimulationInstance != null && SimulationInstance != this)
@@ -44,17 +46,26 @@ public class Simulation : MonoBehaviour
 
         WheelDurability = InitialValue;
         FuelAmount = InitialValue;
-        EngineHeat = InitialValue;
+        EngineHeat = 0;
 
         increment = (TopSpeed - BaseSpeed) / (FuelWeight + WheelsWeight);
         WheelsIncrement = increment * WheelsWeight;
         FuelIncrement = increment * FuelWeight;
+
+        Speed = TopSpeed;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (FuelAmount <= 0 || EngineHeat >= InitialValue)
+        {
+            Speed -= DecreasingTime * Time.deltaTime;
+            Speed = Mathf.Clamp(Speed - DecreasingTime * Time.deltaTime, BaseSpeed, TopSpeed);
+            Debug.Log(Speed);
+            return;
+        }
         if (WheelDurability <= 0)
         {
             WheelDurability = 0;
@@ -77,13 +88,13 @@ public class Simulation : MonoBehaviour
             UIManager.UIManagerInstance.UpdateFuel(FuelAmount);
         }
 
-        if (EngineHeat <= 0)
+        if (EngineHeat >= InitialValue)
         {
-            EngineHeat = 0;
+            EngineHeat = InitialValue;
         }
         else
         {
-            EngineHeat -= DecayRate * Time.deltaTime;
+            EngineHeat += DecayRate * Time.deltaTime;
 
             UIManager.UIManagerInstance.UpdateEngine(EngineHeat);
         }
@@ -91,6 +102,7 @@ public class Simulation : MonoBehaviour
         Speed = BaseSpeed + ((1 / (FuelAmount + 5)) * FuelIncrement) + ((WheelDurability / InitialValue) * WheelsIncrement);
         Debug.Log(Speed);
 
+        
     }
    
 }
