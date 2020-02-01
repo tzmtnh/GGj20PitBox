@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class Car : MonoBehaviour
 {
+	public static Car inst;
+
 	public float animationDuration = 3;
+	[Range(0, 1)] public float fireStrength = 0;
+
 	public BezierSegment inSpline;
 	public BezierSegment outSpline;
 	public ParticleSystem dust;
+	public ParticleSystem fire;
 
 	Vector3 _velocity;
 	public Vector3 velocity { get { return _velocity; } }
 	public float speed { get { return _velocity.magnitude; } }
+
+	Light _fireLight;
 
 	Transform _transform;
 	Transform _steer;
@@ -58,25 +65,8 @@ public class Car : MonoBehaviour
 		_followSplineCo = null;
 	}
 
-    void Awake()
-    {
-        _transform = transform;
-        _steer = _transform.Find("Steer");
-        _frontWheels = _steer.Find("FrontWheels");
-        _rearWheels = _transform.Find("RearWheels");
-    }
-    void Start()
-    { 
-        EnterPit();
-	}
-	
-	void Update() {
-        if (!Simulation.SimulationInst.IsGameRunning())
-        {
-            return;
-        }
-
-        float dt = Time.deltaTime;
+	void UpdateWheels() {
+		float dt = Time.deltaTime;
 		Vector3 pos = _transform.position;
 		Vector3 delta = pos - _lastPos;
 		float dist = delta.magnitude;
@@ -110,8 +100,42 @@ public class Car : MonoBehaviour
 
 		_velocity = delta / dt;
 		_lastPos = pos;
+	}
 
+	void UpdateDust() {
 		var emission = dust.emission;
 		emission.rateOverTimeMultiplier = Mathf.Min(_velocity.magnitude, 1) * 50;
+	}
+
+	void UpdateFire() {
+		var emission = fire.emission;
+		emission.rateOverTimeMultiplier = fireStrength * 50;
+
+		float t = Mathf.PerlinNoise(Time.time * 10, 1.234f);
+		_fireLight.enabled = fireStrength > 0.01f;
+		_fireLight.intensity = Mathf.Lerp(0.5f, 1f, t) * fireStrength * 5f;
+	}
+
+    void Awake()
+    {
+		inst = this;
+        _transform = transform;
+        _steer = _transform.Find("Steer");
+        _frontWheels = _steer.Find("FrontWheels");
+        _rearWheels = _transform.Find("RearWheels");
+		_fireLight = fire.GetComponentInChildren<Light>();
+    }
+
+    void Start()
+    { 
+        EnterPit();
+	}
+	
+	void Update() {
+        if (!Simulation.SimulationInst.IsGameRunning()) return;
+
+		UpdateWheels();
+		UpdateDust();
+		UpdateFire();
 	}
 }
