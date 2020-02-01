@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ public class UIManager : MonoBehaviour
     {
         get { return _uiManagerInst; }
     }
-
+    
     private void Awake()
     {
         if (_uiManagerInst != null && _uiManagerInst != this)
