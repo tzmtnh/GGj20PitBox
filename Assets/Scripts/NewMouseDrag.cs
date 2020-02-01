@@ -123,7 +123,6 @@ public class NewMouseDrag : MonoBehaviour
         {
             if (selected.tag == "RedThing")
             {
-                selected.GetComponent<Rigidbody>().isKinematic = true;
                 selected.GetComponent<Rigidbody>().isKinematic = false;
                 selected = null;
             } if (selected.tag == "Gas" && ConnectGasHandle.inst.connected == false) {
