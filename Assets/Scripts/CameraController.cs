@@ -32,8 +32,8 @@ public class CameraController : MonoBehaviour
 
 		_orbitAngle = -45;
 		_pitchAngle = 45;
-		_zoomParam = zoomRange.z;
-		_zoomTarget = zoomRange.z;
+		_zoomParam = Mathf.InverseLerp(zoomRange.x, zoomRange.y, zoomRange.z);
+		_zoomTarget = _zoomParam;
 	}
 
 	void Update() {
