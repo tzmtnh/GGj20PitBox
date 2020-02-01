@@ -23,12 +23,12 @@ public class CameraController : MonoBehaviour
 	}
 
 	void Update() {
-		if (Input.GetMouseButtonDown(0)) {
+		if (Input.GetMouseButtonDown(1)) {
 			_lastPos = Input.mousePosition;
 		}
 
 		float dt = Time.deltaTime;
-		if (Input.GetMouseButton(0)) {
+		if (Input.GetMouseButton(1)) {
 			Vector2 pos = Input.mousePosition;
 			Vector2 delta = pos - _lastPos;
 
