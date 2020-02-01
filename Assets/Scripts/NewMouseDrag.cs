@@ -13,6 +13,9 @@ public class NewMouseDrag : MonoBehaviour
     public float RedThingHeight = 0.5f;
 	public float gasHeight = 0.5f;
 
+    private Vector3 _oldMouse;
+    private Vector3 _mouseSpeed;
+
 	bool _waitForMouseRelease = false;
 
     [SerializeField] private Transform[] _wheels = new Transform[4];
@@ -43,6 +46,9 @@ public class NewMouseDrag : MonoBehaviour
 
     void Update()
     {
+        _mouseSpeed = _oldMouse - Input.mousePosition;
+        _oldMouse = Input.mousePosition;
+
         if (!Simulation.SimulationInst.IsGameRunning()||!Simulation.SimulationInst.HasGameStarted())
         {
             return;
@@ -123,10 +129,11 @@ public class NewMouseDrag : MonoBehaviour
         {
             if (selected.tag == "RedThing")
             {
-                selected.GetComponent<Rigidbody>().isKinematic = false;
+                selected.GetComponent<Rigidbody>().isKinematic = false  ;
             } if (selected.tag == "Gas" && ConnectGasHandle.inst.connected == false) {
 				selected.GetComponent<Rigidbody>().isKinematic = false;
 			}
+            selected.GetComponent<Rigidbody>().AddForce(_mouseSpeed*100*Time.deltaTime,ForceMode.Force);
 
 			selected = null;
 
