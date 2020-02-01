@@ -17,6 +17,7 @@ public class Simulation : MonoBehaviour
     private float EngineHeat;
     [SerializeField] 
     private int InitialValue = 100;
+    private int InitialValueEngine = 0;
     [SerializeField] 
     private float DecayRate = 5;
 
@@ -35,6 +36,8 @@ public class Simulation : MonoBehaviour
     private float WheelsWeight = 4;
 
     public float WheelsFix;
+    public float FuelRefix;
+    public float EngineFix;
 
     private float FuelIncrement;
     private float WheelsIncrement;
@@ -59,7 +62,7 @@ public class Simulation : MonoBehaviour
         UIManager.UIManagerInstance.UpdateWheels(WheelDurability);
     }
 
-    public void FuelRefil(float FuelRefix)
+    public void FuelRefil()
     {
         if (!PitStop)
         {
@@ -70,6 +73,19 @@ public class Simulation : MonoBehaviour
             FuelAmount = InitialValue;
 
         UIManager.UIManagerInstance.UpdateFuel(FuelAmount);
+    }
+
+    public void EngineRepair()
+    {
+        if (!PitStop)
+        {
+            return;
+        }
+        EngineHeat += EngineFix;
+        if (EngineHeat <= InitialValueEngine)
+            EngineHeat = InitialValueEngine;
+
+        UIManager.UIManagerInstance.UpdateEngine(EngineHeat);
     }
 
     public void PitStopCall(bool state)
@@ -97,7 +113,7 @@ public class Simulation : MonoBehaviour
 
         WheelDurability = InitialValue;
         FuelAmount = InitialValue;
-        EngineHeat = 0;
+        EngineHeat = InitialValueEngine;
 
         increment = (TopSpeed - BaseSpeed) / (FuelWeight + WheelsWeight);
         WheelsIncrement = increment * WheelsWeight;
@@ -118,6 +134,15 @@ public class Simulation : MonoBehaviour
         {
             WheelRepair();
         }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            FuelRefil();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            EngineRepair();
+        }
+
     if (PitStop) {
 
             return;
@@ -137,6 +162,8 @@ public class Simulation : MonoBehaviour
                 {
                     PitStop = true;
                     WheelsFix = (InitialValue - WheelDurability) / 4;
+                    FuelRefix = 5;
+                    EngineFix = -8;
                     WantsStop = false;
                 }
             }
@@ -188,6 +215,8 @@ public class Simulation : MonoBehaviour
             { 
                 PitStop = true;
                 WheelsFix = (InitialValue - WheelDurability) / 4;
+                FuelRefix = 5;
+                EngineFix = -8;
                 WantsStop = false;
             }
         }
