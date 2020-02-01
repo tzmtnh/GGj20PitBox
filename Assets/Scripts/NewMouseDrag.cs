@@ -4,25 +4,30 @@ using UnityEngine;
 
 public class NewMouseDrag : MonoBehaviour
 {
+	public static NewMouseDrag inst;
 
     public GameObject selected;
     public LayerMask layerMask;
 
-    public float whealHeight;
-    public float RedThingHeight;
+    public float whealHeight = 0.5f;
+    public float RedThingHeight = 0.5f;
+	public float gasHeight = 0.5f;
 
+	bool _waitForMouseRelease = false;
 
-    // Start is called before the first frame update
-    void Start()
+	public void WaitForMouseRelease() {
+		_waitForMouseRelease = true;
+	}
+
+	void Awake() {
+		inst = this;
+	}
+
+	void Update()
     {
-        
-    }
+		bool isLeftMouseButtonPressed = Input.GetMouseButton(0);
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (Input.GetMouseButton(0))
+		if (_waitForMouseRelease == false && isLeftMouseButtonPressed)
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -43,16 +48,18 @@ public class NewMouseDrag : MonoBehaviour
                     }
                 }
 
-
-                if (selected != null && selected.tag == "Wheal")
-                { 
-                    selected.transform.position = new Vector3(hit.point.x, whealHeight, hit.point.z);
-                }
-                if (selected != null && (selected.tag == "RedThing" ||  selected.tag == "Gas"))
-                    selected.transform.position = new Vector3(hit.point.x, RedThingHeight, hit.point.z);
+				if (selected != null) {
+					if (selected.tag == "Wheal") {
+						selected.transform.position = new Vector3(hit.point.x, whealHeight, hit.point.z);
+					} else if (selected.tag == "RedThing") {
+						selected.transform.position = new Vector3(hit.point.x, RedThingHeight, hit.point.z);
+					} else if (selected.tag == "Gas") {
+						selected.transform.position = new Vector3(hit.point.x, gasHeight, hit.point.z);
+					}
+				}
             }
         }
-        else if(selected != null)
+        else if(selected != null && _waitForMouseRelease == false)
         {
             if (selected.tag == "RedThing")
             {
@@ -66,5 +73,8 @@ public class NewMouseDrag : MonoBehaviour
             }
         }
 
+		if (_waitForMouseRelease && isLeftMouseButtonPressed == false) {
+			_waitForMouseRelease = false;
+		}
     }
 }
