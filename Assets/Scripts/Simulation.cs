@@ -49,6 +49,21 @@ public class Simulation : MonoBehaviour
 
     private bool WantsStop = false;
 
+    [SerializeField]
+    private int _totalLaps = 30;
+    private int _lapsElapsed = 0;
+
+    private bool _gameRunning = true;
+
+    private float _timeElapsed = 0;
+    [SerializeField]
+    private float _timeDilation = 1;
+
+    public bool IsGameRunning()
+    {
+        return _gameRunning;
+    }
+
     public void WheelRepair()
     {
         if (!PitStop)
@@ -122,10 +137,20 @@ public class Simulation : MonoBehaviour
         Speed = TopSpeed;
 
         UIManager.UIManagerInstance.InitializeUI(InitialValue,InitialValue,InitialValue);
+
+        UIManager.UIManagerInstance.UpdateLaps(_lapsElapsed + 1, _totalLaps);
     }
 
     void Update()
     {
+        if (!IsGameRunning())
+        {
+            return;
+        }
+
+        _timeElapsed += _timeDilation * Time.deltaTime;
+        UIManager.UIManagerInstance.UpdateTimer(_timeElapsed);
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             PitStopCall(!PitStop);
@@ -210,6 +235,14 @@ public class Simulation : MonoBehaviour
         DistanceTraveled += Speed * Time.deltaTime;
         if (DistanceTraveled > RaceDistance)
         {
+            _lapsElapsed++;
+            if (_lapsElapsed == _totalLaps)
+            {
+                _gameRunning = false;
+                return;
+            }
+
+            UIManager.UIManagerInstance.UpdateLaps(_lapsElapsed+1,_totalLaps);
             DistanceTraveled -= RaceDistance;
             if (WantsStop)
             { 
