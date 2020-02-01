@@ -29,16 +29,18 @@ public class NewMouseDrag : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 1000, layerMask))
             {
-                Debug.Log(hit.point);
                 if (selected == null && hit.transform.tag == "Wheal" ||
                     selected == null && hit.transform.tag == "RedThing")
                 {
                     selected = hit.transform.gameObject;
                 }
 
-                if(selected != null && selected.tag == "Wheal" && !selected.GetComponent<WhealStatus>().fixedInPlace)
+                if (selected != null && selected.tag == "Wheal" && !selected.GetComponent<WhealStatus>().fixedInPlace)
+                { 
+                    selected.transform.parent = null;
+                    selected.GetComponent<Rigidbody>().isKinematic = false;
                     selected.transform.position = new Vector3(hit.point.x, whealHeight, hit.point.z);
-
+                }
                 if (selected != null && selected.tag == "RedThing")
                     selected.transform.position = new Vector3(hit.point.x, RedThingHeight, hit.point.z);
             }

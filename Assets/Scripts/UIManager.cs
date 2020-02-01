@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Slider _engineSlider;
 
     [SerializeField] private Text _lapsText;
+    [SerializeField] private Text _timerText;
 
     [SerializeField] private Image _carDisplay;
 
@@ -119,7 +120,13 @@ public class UIManager : MonoBehaviour
         _engineSlider.value = value;
     }
 
+    public void UpdateTimer(float elapsedTime)
+    {
+        string minutes = Mathf.Floor(elapsedTime / 60).ToString("00");
+        string seconds = Mathf.Floor(elapsedTime % 60).ToString("00");
 
+        _timerText.text = minutes + " : " + seconds;
+    }
 
 
     public void UpdateLaps(int currentLap,int lapTotal)
