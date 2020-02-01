@@ -63,6 +63,11 @@ public class Simulation : MonoBehaviour
 
     [SerializeField] private Car _car;
 
+    public bool HasGameStarted()
+    {
+        return _gameStarted;
+    }
+
     public bool IsGameRunning()
     {
         return _gameRunning;

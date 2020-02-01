@@ -43,7 +43,12 @@ public class NewMouseDrag : MonoBehaviour
 
     void Update()
     {
-		bool isLeftMouseButtonPressed = Input.GetMouseButton(0);
+        if (!Simulation.SimulationInst.IsGameRunning()||!Simulation.SimulationInst.HasGameStarted())
+        {
+            return;
+        }
+
+        bool isLeftMouseButtonPressed = Input.GetMouseButton(0);
 
         if (Input.GetMouseButtonDown(0))
         {
