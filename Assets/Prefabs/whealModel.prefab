@@ -141,6 +141,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockHeight: 50
   lockIfNotDrag: 0
+  redThing: 0
+  wheal: 1
+  fuel: 0
 --- !u!1 &6713739786610748593
 GameObject:
   m_ObjectHideFlags: 0

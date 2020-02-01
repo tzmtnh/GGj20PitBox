@@ -245,6 +245,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockHeight: 50
   lockIfNotDrag: 0
+  redThing: 1
+  wheal: 0
+  fuel: 0
 --- !u!1 &39078488
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,6 +526,46 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180689004}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &277804952 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5017991103407399455, guid: b1471929dc2eb014ea2dc70f8e4e39b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 456461869}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &277804953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277804952}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68977729e44e0fd498573108204a1f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayLenght: 100
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  wheal: {fileID: 6340531169778515046, guid: 4f0018cc65cfeb546a60dc717db91a8c, type: 3}
+--- !u!114 &277804956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277804952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d50dacc1e40a3545a19e5d7985f10f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayLenght: 1000
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  wheal: {fileID: 6340531169778515046, guid: 4f0018cc65cfeb546a60dc717db91a8c, type: 3}
 --- !u!1 &343887367
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,7 +682,7 @@ GameObject:
   - component: {fileID: 397379227}
   m_Layer: 0
   m_Name: Jack
-  m_TagString: Untagged
+  m_TagString: Jack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1178,9 +1221,7 @@ GameObject:
   - component: {fileID: 805567587}
   - component: {fileID: 805567586}
   - component: {fileID: 805567588}
-  - component: {fileID: 805567589}
   - component: {fileID: 805567585}
-  - component: {fileID: 805567590}
   - component: {fileID: 805567592}
   - component: {fileID: 805567591}
   m_Layer: 0
@@ -1280,30 +1321,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &805567589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805567583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42db24ad8ee7043489b9ef3a5f48b957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &805567590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805567583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dcca949fcce15d4087044308f3f91b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &805567591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1318,6 +1335,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockHeight: 50
   lockIfNotDrag: 1
+  redThing: 1
+  wheal: 0
+  fuel: 0
 --- !u!114 &805567592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1528,9 +1548,7 @@ GameObject:
   - component: {fileID: 1036572614}
   - component: {fileID: 1036572613}
   - component: {fileID: 1036572615}
-  - component: {fileID: 1036572616}
   - component: {fileID: 1036572612}
-  - component: {fileID: 1036572617}
   - component: {fileID: 1036572619}
   - component: {fileID: 1036572618}
   m_Layer: 0
@@ -1630,30 +1648,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1036572616
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1036572610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42db24ad8ee7043489b9ef3a5f48b957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1036572617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1036572610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dcca949fcce15d4087044308f3f91b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1036572618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1668,6 +1662,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockHeight: 50
   lockIfNotDrag: 1
+  redThing: 1
+  wheal: 0
+  fuel: 0
 --- !u!114 &1036572619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2152,9 +2149,7 @@ GameObject:
   - component: {fileID: 2058289486}
   - component: {fileID: 2058289485}
   - component: {fileID: 2058289487}
-  - component: {fileID: 2058289488}
   - component: {fileID: 2058289484}
-  - component: {fileID: 2058289489}
   - component: {fileID: 2058289491}
   - component: {fileID: 2058289490}
   m_Layer: 0
@@ -2254,30 +2249,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2058289488
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058289482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42db24ad8ee7043489b9ef3a5f48b957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2058289489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058289482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dcca949fcce15d4087044308f3f91b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2058289490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2292,6 +2263,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockHeight: 50
   lockIfNotDrag: 1
+  redThing: 1
+  wheal: 0
+  fuel: 0
 --- !u!114 &2058289491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2413,9 +2387,7 @@ GameObject:
   - component: {fileID: 2146731335}
   - component: {fileID: 2146731334}
   - component: {fileID: 2146731336}
-  - component: {fileID: 2146731337}
   - component: {fileID: 2146731333}
-  - component: {fileID: 2146731338}
   - component: {fileID: 2146731340}
   - component: {fileID: 2146731339}
   m_Layer: 0
@@ -2515,30 +2487,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2146731337
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146731331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42db24ad8ee7043489b9ef3a5f48b957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2146731338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146731331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dcca949fcce15d4087044308f3f91b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2146731339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2553,6 +2501,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockHeight: 50
   lockIfNotDrag: 1
+  redThing: 1
+  wheal: 0
+  fuel: 0
 --- !u!114 &2146731340
 MonoBehaviour:
   m_ObjectHideFlags: 0
