@@ -103,22 +103,41 @@ public class UIManager : MonoBehaviour
         _engineSlider.value = 0;
     }
 
+	Dictionary<Slider, Image> _imageBySlider = new Dictionary<Slider, Image>();
 
+	void SetSliderColor(Slider slider, float value) {
+		Image image;
+		if (_imageBySlider.ContainsKey(slider)) {
+			image = _imageBySlider[slider];
+		} else {
+			Transform area = slider.transform.Find("Fill Area");
+			Transform fill = area.Find("Fill");
+			image = fill.GetComponent<Image>();
+			_imageBySlider.Add(slider, image);
+		}
 
-    public void UpdateWheels(float value)
+		float t = 1f - (1f - value) * (1f - value);
+		Color color = Color.Lerp(Color.red, Color.white, t);
+		image.color = color;
+	}
+
+	public void UpdateWheels(float value)
     {
         _wheelsSlider.value = value;
-    }
+		SetSliderColor(_wheelsSlider, value / 100f);
+	}
 
     public void UpdateFuel(float value)
     {
         _fuelSlider.value = value;
-    }
+		SetSliderColor(_fuelSlider, value / 100f);
+	}
 
     public void UpdateEngine(float value)
     {
         _engineSlider.value = value;
-    }
+		SetSliderColor(_engineSlider, 1f - value / 100f);
+	}
 
     public void UpdateTimer(float elapsedTime)
     {
