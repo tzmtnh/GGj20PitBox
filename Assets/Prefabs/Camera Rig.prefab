@@ -42,9 +42,9 @@ GameObject:
   - component: {fileID: 5017991102241220925}
   - component: {fileID: 5017991102241220926}
   - component: {fileID: 5017991102241220927}
-  - component: {fileID: 1458644824}
   - component: {fileID: 1458644825}
   - component: {fileID: 1458644826}
+  - component: {fileID: 879721401}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -117,25 +117,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5017991102241220864}
   m_Enabled: 1
---- !u!114 &1458644824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5017991102241220864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dbb56e9112f90843983a9743c51fefa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selected: {fileID: 0}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 768
-  whealHeight: 0.5
-  RedThingHeight: 0.5
-  gasHeight: 1
 --- !u!114 &1458644825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +194,32 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &879721401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5017991102241220864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbb56e9112f90843983a9743c51fefa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selected: {fileID: 8991074698934663253, guid: f3ba90a13a77df649a26ab5add410128,
+    type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 768
+  wheal: {fileID: 8991074698934663253, guid: f3ba90a13a77df649a26ab5add410128, type: 3}
+  whealHeight: 0.5
+  RedThingHeight: 0
+  gasHeight: 0.5
+  _wheels:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &5017991103407399455
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,5 +266,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 2
   drag: 0.1
-  zoomRange: {x: 2, y: 7, z: 3}
+  zoomRange: {x: 2, y: 7, z: 4}
   zoomSensitivity: 10
