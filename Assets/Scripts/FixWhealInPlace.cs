@@ -12,10 +12,6 @@ public class FixWhealInPlace : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (transform.childCount > 0)
-        {
-            return;
-        }
 
         if (itsOk)
         {
@@ -23,16 +19,8 @@ public class FixWhealInPlace : MonoBehaviour
             {
                 if (other.GetComponent<WhealStatus>().theyAreNew)
                 {
-                    other.transform.parent = transform;
-                    other.transform.position = transform.position;
-                    other.transform.rotation = transform.rotation;
-                    if (_isInverted)
-                    {
-                        other.transform.Rotate(0, 0, 180);
-                    }
-                    other.GetComponent<WhealStatus>().fixedInPlace = true;
-                    other.GetComponent<WhealStatus>()._canMove = false;
-                    other.GetComponent<Rigidbody>().isKinematic = true;
+                   Destroy(other.gameObject);
+                   transform.GetChild(0).gameObject.SetActive(true);
                     itsOk = false;
                 }
 
