@@ -8,6 +8,7 @@ TagManager:
   - Wheal
   - Jack
   - RedThing
+  - Gas
   layers:
   - Default
   - TransparentFX
