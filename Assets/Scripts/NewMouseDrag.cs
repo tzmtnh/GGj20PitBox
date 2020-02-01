@@ -13,10 +13,14 @@ public class NewMouseDrag : MonoBehaviour
     public float RedThingHeight = 0.5f;
 	public float gasHeight = 0.5f;
 
-    private Vector3 _oldMouse;
-    private Vector3 _mouseSpeed;
+    private Vector3 _oldRag;
+    private Vector3 _ragSpeed;
 
-	bool _waitForMouseRelease = false;
+    [SerializeField]
+    private int _throwStrength = 500000;
+
+
+    bool _waitForMouseRelease = false;
 
     [SerializeField] private Transform[] _wheels = new Transform[4];
     private bool[] _wheelsMoved = {false, false, false, false};
@@ -46,8 +50,7 @@ public class NewMouseDrag : MonoBehaviour
 
     void Update()
     {
-        _mouseSpeed = _oldMouse - Input.mousePosition;
-        _oldMouse = Input.mousePosition;
+        
 
         if (!Simulation.SimulationInst.IsGameRunning()||!Simulation.SimulationInst.HasGameStarted())
         {
@@ -120,9 +123,12 @@ public class NewMouseDrag : MonoBehaviour
 						rb.isKinematic = true;
 						gridHeight = gasHeight;
 					}
+                    
+                    rb.position = GetPointOnGrid(ray, gridHeight);
 
-					rb.position = GetPointOnGrid(ray, gridHeight);
-				}
+                    _ragSpeed = _oldRag - rb.position;
+                    _oldRag = rb.position;
+                }
 			}
         }
         else if(selected != null && _waitForMouseRelease == false)
@@ -133,7 +139,8 @@ public class NewMouseDrag : MonoBehaviour
             } if (selected.tag == "Gas" && ConnectGasHandle.inst.connected == false) {
 				selected.GetComponent<Rigidbody>().isKinematic = false;
 			}
-            selected.GetComponent<Rigidbody>().AddForce(_mouseSpeed*100*Time.deltaTime,ForceMode.Force);
+            Debug.Log(_ragSpeed);
+            selected.GetComponent<Rigidbody>().AddForce(-_ragSpeed*_throwStrength*Time.deltaTime,ForceMode.Force);
 
 			selected = null;
 
