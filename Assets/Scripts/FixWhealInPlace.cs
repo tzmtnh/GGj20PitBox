@@ -12,18 +12,17 @@ public class FixWhealInPlace : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
         if (itsOk)
         {
             if (other.tag == "Wheal")
             {
                 if (other.GetComponent<WhealStatus>().theyAreNew)
                 {
-                   Destroy(other.gameObject);
-                   transform.GetChild(0).gameObject.SetActive(true);
+                    Simulation.SimulationInst.WheelRepair();
+                    Destroy(other.gameObject);
+                    transform.GetChild(0).gameObject.SetActive(true);
                     itsOk = false;
                 }
-
             }
         }
     }

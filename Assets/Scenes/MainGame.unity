@@ -1670,7 +1670,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Camera Rig
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1458644824, guid: b1471929dc2eb014ea2dc70f8e4e39b5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b1471929dc2eb014ea2dc70f8e4e39b5, type: 3}
 --- !u!1 &2139977439 stripped
 GameObject:
