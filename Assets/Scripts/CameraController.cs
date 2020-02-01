@@ -6,6 +6,8 @@ public class CameraController : MonoBehaviour
 {
 	public float sensitivity = 2;
 	public float drag = 0.5f;
+
+	public Vector3 zoomRange = new Vector3(2, 5, 3);
 	public float zoomSensitivity = 1;
 
 	Camera _camera;
@@ -13,8 +15,9 @@ public class CameraController : MonoBehaviour
 	Transform _zoom;
 	Vector2 _lastPos;
 
-	float _dist;
-	float _distVelocity;
+	float _zoomParam;
+	float _zoomTarget;
+	float _zoomVelocity;
 
 	float _orbitAngle;
 	float _orbitVelocity;
@@ -26,6 +29,11 @@ public class CameraController : MonoBehaviour
 		_pitch = transform.Find("Camera Pitch");
 		_camera = _pitch.GetComponentInChildren<Camera>();
 		_zoom = _camera.transform;
+
+		_orbitAngle = -45;
+		_pitchAngle = 45;
+		_zoomParam = zoomRange.z;
+		_zoomTarget = zoomRange.z;
 	}
 
 	void Update() {
@@ -53,6 +61,10 @@ public class CameraController : MonoBehaviour
 		_pitch.localRotation = Quaternion.Euler(_pitchAngle, 0, 0);
 
 		Vector3 scrollDelta = Input.mouseScrollDelta;
-		_dist += dt * zoomSensitivity * scrollDelta.y;
+		_zoomTarget -= dt * zoomSensitivity * scrollDelta.y;
+		_zoomTarget = Mathf.Clamp01(_zoomTarget);
+		_zoomParam = Mathf.SmoothDamp(_zoomParam, _zoomTarget, ref _zoomVelocity, 0.3f);
+		float zoom = -Mathf.Lerp(zoomRange.x, zoomRange.y, Mathf.SmoothStep(0, 1, _zoomParam));
+		_zoom.localPosition = new Vector3(0, 0, zoom);
 	}
 }
