@@ -831,6 +831,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3190862096754221276, guid: 5f7ec93846c93fd43bb2dfff179610da,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190862096754221276, guid: 5f7ec93846c93fd43bb2dfff179610da,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190862096754221276, guid: 5f7ec93846c93fd43bb2dfff179610da,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5716317802494864226, guid: 5f7ec93846c93fd43bb2dfff179610da,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8935092900364284778, guid: 5f7ec93846c93fd43bb2dfff179610da,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -2307,7 +2327,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialValue: 100
-  _decayRate: 2
+  _wheelsDecayRate: 2
+  _fuelDecayRate: 3
   _engineLowHeatingRate: 7
   _engineMedHeatingRate: 11
   _engineHighHeatingRate: 15
