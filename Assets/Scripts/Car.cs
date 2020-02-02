@@ -66,7 +66,8 @@ public class Car : MonoBehaviour
         float timer = duration * startParam;
 
 		dust.Stop();
-		_transform.position = segment.getPos(timer / duration);
+		_lastPos = segment.getPos(timer / duration);
+		_transform.position = _lastPos;
 		dust.Play();
 
 		AudioManager.AuidoManagerInstance.PlayingCarEngineAudio(true, 1);
