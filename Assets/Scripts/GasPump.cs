@@ -7,23 +7,23 @@ public class GasPump : MonoBehaviour
 	public Transform[] bones;
 
 	Transform _handle;
-	Vector3 _tubeOrigin;
+	Transform _hoseRoot;
 
 	void SetupTube() {
 		Rigidbody parentRB = null;
-		Transform root = bones[0].parent;
+		_hoseRoot = bones[0].parent;
 
-		if (root != null) {
-			parentRB = root.gameObject.GetComponent<Rigidbody>();
+		if (_hoseRoot != null) {
+			parentRB = _hoseRoot.gameObject.GetComponent<Rigidbody>();
 			if (parentRB == null) {
-				parentRB = root.gameObject.AddComponent<Rigidbody>();
+				parentRB = _hoseRoot.gameObject.AddComponent<Rigidbody>();
 				parentRB.isKinematic = true;
 			}
 		}
 
-		foreach (Transform bone in bones) {
-			bone.SetParent(root);
-		}
+		//foreach (Transform bone in bones) {
+		//	bone.SetParent(_hoseRoot);
+		//}
 
 		for (int i = 0; i < bones.Length; i++) {
 			Transform t = bones[i];
@@ -89,5 +89,17 @@ public class GasPump : MonoBehaviour
 	void Awake() {
 		_handle = bones[0].parent.Find("Handle");
 		SetupTube();
+	}
+
+	void Update() {
+		if (ConnectGasHandle.inst.broken) return;
+		if (ConnectGasHandle.inst.connected) {
+			float dist = Vector3.Distance(_handle.position, _hoseRoot.position);
+			if (dist > 4) {
+				ConnectGasHandle.inst.broken = true;
+				_hoseRoot.GetComponent<Rigidbody>().isKinematic = false;
+				Debug.LogWarning("Broken!");
+			}
+		}
 	}
 }

@@ -10,8 +10,9 @@ public class ConnectGasHandle : MonoBehaviour
 	Transform _attachment;
 	Transform _oldParent;
 
-	bool _connected = false;
-	public bool connected { get { return _connected; } }
+	public bool connected { get; private set; }
+
+	public bool broken { get; set; }
 
 	bool _canConnect = true;
     [SerializeField]
@@ -39,7 +40,7 @@ public class ConnectGasHandle : MonoBehaviour
 	void OnTriggerEnter(Collider other)
     {
 		if (_canConnect == false) return;
-		if (_connected) return;
+		if (connected) return;
 		if (other.tag != "Gas") return;
 
         other.transform.position = _anchor.position;
@@ -48,7 +49,7 @@ public class ConnectGasHandle : MonoBehaviour
 		
 		NewMouseDrag.inst.WaitForMouseRelease();
 
-        _connected = true;
+        connected = true;
 		_canConnect = false;
 
         AudioManager.AuidoManagerInstance.PlayingFuelingAudio(true,1);
@@ -56,22 +57,21 @@ public class ConnectGasHandle : MonoBehaviour
 	}
 
 	void OnTriggerExit(Collider other) {
-		if (_connected == false) return;
+		if (connected == false) return;
 		if (other.tag != "Gas") return;
 
 		other.GetComponent<Rigidbody>().isKinematic = false;
 
-		_connected = false;
+		connected = false;
         AudioManager.AuidoManagerInstance.PlayingFuelingAudio(false, 1);
     }
 
     void Update() {
-        if (_connected)
-        {
+        if (connected) {
 			Simulation.SimulationInst.FuelRefil(_fuelPerSecond*Time.deltaTime);
         }
 
-        if (_canConnect == false && _connected == false && Input.GetMouseButtonUp(0)) {
+        if (_canConnect == false && connected == false && Input.GetMouseButtonUp(0)) {
 			_canConnect = true;
 		}
 	}
