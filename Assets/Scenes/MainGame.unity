@@ -136,19 +136,10 @@ PrefabInstance:
       propertyPath: outSpline
       value: 
       objectReference: {fileID: 794595294}
-    - target: {fileID: 105068628, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
-      propertyPath: animationDuration
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6101909947087901035, guid: 3c9053f59e4191644ad068ea183ecea5,
         type: 3}
       propertyPath: m_Name
       value: Car
-      objectReference: {fileID: 0}
-    - target: {fileID: 6101909947087901035, guid: 3c9053f59e4191644ad068ea183ecea5,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7130622200361395064, guid: 3c9053f59e4191644ad068ea183ecea5,
         type: 3}
@@ -1046,6 +1037,7 @@ MonoBehaviour:
   _timeDilation: 1
   _car: {fileID: 105068628}
   _mouseDrag: {fileID: 1574371042}
+  _stopDistance: 700
   _startTime: 5
 --- !u!4 &1771185868
 Transform:

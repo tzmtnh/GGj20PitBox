@@ -20290,7 +20290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf41e50c319a67d479e61cc6632f0c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationDuration: 3
+  animationDuration: 4
   fireStrength: 0
   dust: {fileID: 248554518}
   fire: {fileID: 211398182981170248}

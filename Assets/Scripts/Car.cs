@@ -62,7 +62,6 @@ public class Car : MonoBehaviour
 	Coroutine _followSplineCo = null;
 	IEnumerator FollowSplineCo(float duration, float startParam, BezierSegment segment)
     {
-        duration *= (1f - startParam);
 		float timer = duration * startParam;
 		while (timer < duration) {
 			float t = Mathf.SmoothStep(0, 1, timer / duration);
