@@ -6,13 +6,21 @@ public class Car : MonoBehaviour
 {
 	public static Car inst;
 
+	[Header("Params")]
 	public float animationDuration = 3;
 	[Range(0, 1)] public float fireStrength = 0;
 
-	public BezierSegment inSpline;
-	public BezierSegment outSpline;
+	[Header("Particles")]
 	public ParticleSystem dust;
 	public ParticleSystem fire;
+	public ParticleSystem[] sparks;
+
+	[Header("Wheels")]
+	public Transform[] wheels;
+
+	[Header("Path")]
+	public BezierSegment inSpline;
+	public BezierSegment outSpline;
 
 	Vector3 _velocity;
 	public Vector3 velocity { get { return _velocity; } }
@@ -116,6 +124,25 @@ public class Car : MonoBehaviour
 		_fireLight.intensity = Mathf.Lerp(0.5f, 1f, t) * fireStrength * 5f;
 	}
 
+	void ToggleEmission(ParticleSystem system, bool state) {
+		var emission = system.emission;
+		emission.enabled = state;
+	}
+
+	void UpdateSparks() {
+		bool isMoving = speed > 0.5f;
+
+		bool sparksFrontRight =	isMoving && !wheels[0].gameObject.activeInHierarchy;
+		bool sparksFrontLeft =	isMoving && !wheels[1].gameObject.activeInHierarchy;
+		bool sparksRearRight =	isMoving && !wheels[2].gameObject.activeInHierarchy;
+		bool sparksRearLeft =	isMoving && !wheels[3].gameObject.activeInHierarchy;
+
+		ToggleEmission(sparks[0], sparksFrontRight);
+		ToggleEmission(sparks[1], sparksFrontLeft);
+		ToggleEmission(sparks[2], sparksRearRight);
+		ToggleEmission(sparks[3], sparksRearLeft);
+	}
+
     void Awake()
     {
 		inst = this;
@@ -132,5 +159,6 @@ public class Car : MonoBehaviour
 		UpdateWheels();
 		UpdateDust();
 		UpdateFire();
+		UpdateSparks();
 	}
 }

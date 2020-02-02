@@ -136,6 +136,10 @@ PrefabInstance:
       propertyPath: outSpline
       value: 
       objectReference: {fileID: 794595294}
+    - target: {fileID: 105068628, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
+      propertyPath: animationDuration
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6101909947087901035, guid: 3c9053f59e4191644ad068ea183ecea5,
         type: 3}
       propertyPath: m_Name
