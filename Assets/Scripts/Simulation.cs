@@ -28,8 +28,8 @@ public class Simulation : MonoBehaviour
     [SerializeField] private float _engineMedThreshold = 50;
     [SerializeField] private float _engineHighThreshold = 75;
 
-    [SerializeField] private float __enginePitCoolingRate = 3;
-    [SerializeField] private float __engineSlowPitCoolingRate = 2;
+    [SerializeField] private float _enginePitCoolingRate = 3;
+    [SerializeField] private float _engineSlowPitCoolingRate = 2;
 
     private float _speed;
     [SerializeField] 
@@ -248,11 +248,11 @@ public class Simulation : MonoBehaviour
             }
             else if(_engineHeat >=_engineMedThreshold)
             {
-                EngineRepair(__engineSlowPitCoolingRate);
+                EngineRepair(_engineSlowPitCoolingRate*Time.deltaTime);
             }
             else
             {
-                EngineRepair(__engineSlowPitCoolingRate);
+                EngineRepair(_enginePitCoolingRate*Time.deltaTime);
             }
 
             return;
