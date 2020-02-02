@@ -311,11 +311,11 @@ public class Simulation : MonoBehaviour
             if (_wantsStop && _distanceTraveled >= _stopDistance)
             {
                 float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
-                if (wantedDuration > Car.inst.animationDuration || wantedDuration < Car.inst.animationDuration/4)
+                /*if (wantedDuration > Car.inst.animationDuration || wantedDuration < Car.inst.animationDuration/4)
                 {
                     UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);
                     return;
-                }
+                }*/
 
                 float startParam = 1 - Mathf.Clamp(wantedDuration / Car.inst.animationDuration, 0, 1);
 				Car.inst.EnterPit(startParam);
@@ -424,11 +424,11 @@ public class Simulation : MonoBehaviour
         if (_wantsStop && _distanceTraveled >= _stopDistance)
         {
             float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
-            if (wantedDuration > Car.inst.animationDuration||wantedDuration < Car.inst.animationDuration/10)
+            /*if (wantedDuration > Car.inst.animationDuration||wantedDuration < Car.inst.animationDuration/10)
             {
                 UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);
                 return;
-            }
+            }*/
 
             float startParam = 1 - Mathf.Clamp(wantedDuration / Car.inst.animationDuration, 0, 1);
 			Car.inst.EnterPit(startParam);
