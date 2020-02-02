@@ -22,7 +22,6 @@ public class NewMouseDrag : MonoBehaviour
 
     bool _waitForMouseRelease = false;
 
-    [SerializeField] private Transform[] _wheels = new Transform[4];
     private bool[] _wheelsMoved = {false, false, false, false};
 
 	public void WaitForMouseRelease() {
@@ -48,10 +47,9 @@ public class NewMouseDrag : MonoBehaviour
 		return ray.origin + ray.direction * enter;
 	}
 
+	public Vector3 temp;
     void Update()
     {
-        
-
         if (!Simulation.SimulationInst.IsGameRunning()||!Simulation.SimulationInst.HasGameStarted())
         {
             return;
@@ -72,11 +70,11 @@ public class NewMouseDrag : MonoBehaviour
                     {
                         for (int i=0; i<=3; i++)
                         { 
-                            Debug.Log(_wheelsMoved[i]);
-                            if (_wheels[i] == hit.transform && _wheelsMoved[i]==false)
+                            //Debug.Log(_wheelsMoved[i]);
+                            if (Car.inst.wheels[i] == hit.transform && _wheelsMoved[i]==false)
                             {
                                 _wheelsMoved[i] = true;
-                                Debug.Log("Found Mesh");
+                                //Debug.Log("Found Mesh");
                                 hit.transform.GetComponentInParent<FixWhealInPlace>().itsOk = true;
                                 hit.transform.gameObject.SetActive(false);
                                 Instantiate(wheal, hit.transform.position, wheal.transform.rotation).GetComponent<WhealStatus>()
@@ -119,6 +117,8 @@ public class NewMouseDrag : MonoBehaviour
 						gridHeight = whealHeight;
 					} else if (selected.tag == "RedThing") {
 						gridHeight = RedThingHeight;
+						rb.isKinematic = true;
+						rb.rotation = Quaternion.LookRotation(hit.point - rb.position) * Quaternion.Euler(temp);
 					} else if (selected.tag == "Gas") {
 						rb.isKinematic = true;
 						gridHeight = gasHeight;
@@ -139,7 +139,7 @@ public class NewMouseDrag : MonoBehaviour
             } if (selected.tag == "Gas" && ConnectGasHandle.inst.connected == false) {
 				selected.GetComponent<Rigidbody>().isKinematic = false;
 			}
-            Debug.Log(_ragSpeed);
+            //Debug.Log(_ragSpeed);
             selected.GetComponent<Rigidbody>().AddForce(-_ragSpeed*_throwStrength*Time.deltaTime,ForceMode.Force);
 
 			selected = null;

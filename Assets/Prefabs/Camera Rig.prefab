@@ -89,7 +89,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 100
   orthographic: 0
@@ -213,13 +213,10 @@ MonoBehaviour:
     m_Bits: 768
   wheal: {fileID: 8991074698934663253, guid: f3ba90a13a77df649a26ab5add410128, type: 3}
   whealHeight: 0.5
-  RedThingHeight: 0
-  gasHeight: 0.5
-  _wheels:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  RedThingHeight: 1.5
+  gasHeight: 1
+  _throwStrength: 500000
+  temp: {x: -90, y: 90, z: 0}
 --- !u!1 &5017991103407399455
 GameObject:
   m_ObjectHideFlags: 0
