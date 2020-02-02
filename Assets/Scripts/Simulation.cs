@@ -271,9 +271,8 @@ public class Simulation : MonoBehaviour
                 _wheelsFix = (_initialValue - _wheelDurability) / 4;
                 _wantsStop = false;
                 float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
-                float startParam = 1 -Mathf.Clamp(wantedDuration / _car.animationDuration,0,1);
+                float startParam = 1 - Mathf.Clamp(wantedDuration / _car.animationDuration, 0, 1);
                 _car.EnterPit(startParam);
-                _car.EnterPit();
             }
 
             if (_distanceTraveled > _raceDistance)
