@@ -19,8 +19,6 @@ public class Car : MonoBehaviour
 
 	[Header("Setup")]
 	public Transform[] wheels;
-	public BezierSegment inSpline;
-	public BezierSegment outSpline;
 	public Shader hueShader;
 
 	Vector3 _velocity;
@@ -47,11 +45,15 @@ public class Car : MonoBehaviour
 	const float WHEEL_RADIUS = 0.35f;
 
 	public void EnterPit(float startParam = 0) {
-		FollowSpline(animationDuration, startParam, inSpline);
+		FollowSpline(animationDuration, startParam, PathManager.inst.inSpline);
 	}
 
 	public void ExitPit() {
-		FollowSpline(animationDuration, 0, outSpline);
+		FollowSpline(animationDuration, 0, PathManager.inst.outSpline);
+	}
+
+	public void PassBy() {
+		FollowSpline(animationDuration * 2, 0, PathManager.inst.roadSpline);
 	}
 
 	void FollowSpline(float duration, float startParam, BezierSegment segment) {
