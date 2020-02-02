@@ -37,16 +37,16 @@ public class UIManager : MonoBehaviour
         switch (state)
         {
             case ETextState.Parking:
-                _timerText.text = "The Car is Coming";
+                _informationText.text = "The Car is Coming";
                 break;
             case ETextState.Running:
-                _timerText.text = "Press \"Space\" to Bring in the Car";
+                _informationText.text = "Press \"Space\" to Bring in the Car";
                 break;
             case ETextState.Stopped:
-                _timerText.text = "Press \"Space\" to Send out the Car";
+                _informationText.text = "Press \"Space\" to Send out the Car";
                 break;
             case ETextState.Empty:
-                _timerText.text = "";
+                _informationText.text = "";
                 break;
         }
     }
@@ -114,7 +114,7 @@ public class UIManager : MonoBehaviour
             _pathLength += Vector3.Distance(lastPoint.localPosition, point.localPosition);
             lastPoint = point;
         }
-
+        UpdateInformationText(ETextState.Empty);
     }
 
     public void InitializeUI(float wheelsMaxValue, float fuelMaxValue, float engineMaxValue)
