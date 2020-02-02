@@ -124,7 +124,7 @@ public class Car : MonoBehaviour
 		_fireLight.intensity = Mathf.Lerp(0.5f, 1f, t) * fireStrength * 5f;
 	}
 
-	void ToggleEmission(ParticleSystem system, bool state) {
+	public static void ToggleEmission(ParticleSystem system, bool state) {
 		var emission = system.emission;
 		emission.enabled = state;
 	}
