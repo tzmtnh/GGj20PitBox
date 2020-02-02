@@ -12,12 +12,35 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _electricRatchetAudioSource;
     [SerializeField] private AudioSource _carEngineAudioSource;
     [SerializeField] private AudioSource _engineFireAudioSource;
+    [SerializeField] private AudioSource _enginePassiveSound;
+
     [SerializeField] private AudioClip[] _electrictRatchetAudioClips;
     [SerializeField] private AudioMixer _audioMixer;
 
     private void Start()
     {
         _audioMixer.SetFloat("MusicVol", PersistScript.PersistScriptInstance.GetVolume());
+    }
+
+    public void PauseSound(bool pause)
+    {
+        if (pause)
+        {
+            _fireExtinguisherAudioSource.Pause();
+            _fuelingAudioSource.Pause();
+            _electricRatchetAudioSource.Pause();
+            _carEngineAudioSource.Pause();
+            _engineFireAudioSource.Pause();
+            _enginePassiveSound.Pause();
+            return;
+        }
+        _fireExtinguisherAudioSource.UnPause();
+        _fuelingAudioSource.UnPause();
+        _electricRatchetAudioSource.UnPause();
+        _carEngineAudioSource.UnPause();
+        _engineFireAudioSource.UnPause();
+        _enginePassiveSound.UnPause();
+        return;
     }
 
     private static AudioManager _instance;

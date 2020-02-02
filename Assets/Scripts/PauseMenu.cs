@@ -16,10 +16,12 @@ public class PauseMenu : MonoBehaviour
             if (GameIsPaused)
             {
                 Resume();
+                AudioManager.AuidoManagerInstance.PauseSound(false);
             }
             else
             {
                 Pause();
+                AudioManager.AuidoManagerInstance.PauseSound(true);
             }
         }
     }
