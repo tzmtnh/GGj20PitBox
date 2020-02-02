@@ -261,6 +261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb4fe31c1afeb3f419cd23d59157e9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initOrbit: 190
+  initPitch: 25
   sensitivity: 2
   drag: 0.1
   zoomRange: {x: 2, y: 7, z: 4}

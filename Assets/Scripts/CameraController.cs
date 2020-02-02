@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+	public float initOrbit = -45;
+	public float initPitch = 30;
+
 	public float sensitivity = 2;
 	public float drag = 0.5f;
 
@@ -30,8 +33,8 @@ public class CameraController : MonoBehaviour
 		_camera = _pitch.GetComponentInChildren<Camera>();
 		_zoom = _camera.transform;
 
-		_orbitAngle = -45;
-		_pitchAngle = 30;
+		_orbitAngle = initOrbit;
+		_pitchAngle = initPitch;
 		_zoomParam = Mathf.InverseLerp(zoomRange.x, zoomRange.y, zoomRange.z);
 		_zoomTarget = _zoomParam;
 	}
