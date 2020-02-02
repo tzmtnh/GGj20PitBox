@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text _lapsText;
     [SerializeField] private Text _timerText;
     [SerializeField] private Text _informationText;
+    [SerializeField] private Text _startTimer;
 
     [SerializeField] private Image _carDisplay;
 
@@ -95,7 +96,6 @@ public class UIManager : MonoBehaviour
         else
         {
             _uiManagerInst = this;
-            DontDestroyOnLoad(this);
         }
     }
 
@@ -176,5 +176,10 @@ public class UIManager : MonoBehaviour
     public void UpdateLaps(int currentLap,int lapTotal)
     {
         _lapsText.text = currentLap + "/" + lapTotal;
+    }
+
+    public void UpdateStartTimer(string text)
+    {
+        _startTimer.text = text;
     }
 }

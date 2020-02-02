@@ -71,6 +71,10 @@ public class Simulation : MonoBehaviour
     [SerializeField] private Car _car;
     [SerializeField] private NewMouseDrag _mouseDrag;
 
+    [SerializeField]
+    private int _startTime = 5;
+    private int _timerTime;
+
     public bool EngineCanCoolOff()
     {
         return _engineHeat > _engineMedThreshold;
@@ -151,12 +155,13 @@ public class Simulation : MonoBehaviour
             Destroy(this.gameObject);
         else
             SimulationInstance = this;
-            DontDestroyOnLoad(this);
     }
 
     void Start() {
 
         float increment;
+
+        _timerTime = _startTime;
 
         _wheelDurability = _initialValue;
         _fuelAmount = _initialValue;
@@ -171,6 +176,30 @@ public class Simulation : MonoBehaviour
         UIManager.UIManagerInstance.InitializeUI(_initialValue,_initialValue,_initialValue);
 
         UIManager.UIManagerInstance.UpdateLaps(_lapsElapsed + 1, _totalLaps);
+        StartCoroutine(StartEnum());
+    }
+
+    
+    private IEnumerator StartEnum()
+    {
+        while (true)
+        {
+            Debug.Log("pois");
+            _timerTime--;
+            UIManager.UIManagerInstance.UpdateStartTimer(_timerTime.ToString());
+            if (_timerTime == 0)
+            {
+                UIManager.UIManagerInstance.UpdateStartTimer("GO!");
+                _gameStarted = true;
+                PitStopCall(!_pitStop);
+            }
+            if (_timerTime < 0)
+            {
+                UIManager.UIManagerInstance.UpdateStartTimer("");
+                    StopAllCoroutines();
+            }
+           yield return new WaitForSeconds(1f);
+        }
     }
 
     void Update()
@@ -185,7 +214,6 @@ public class Simulation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             PitStopCall(!_pitStop);
-            _gameStarted = true;
         }
 
         if (!_gameStarted)

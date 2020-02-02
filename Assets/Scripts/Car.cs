@@ -126,11 +126,6 @@ public class Car : MonoBehaviour
 		_fireLight = fire.GetComponentInChildren<Light>();
     }
 
-    void Start()
-    { 
-        EnterPit();
-	}
-	
 	void Update() {
         if (!Simulation.SimulationInst.IsGameRunning()) return;
 
