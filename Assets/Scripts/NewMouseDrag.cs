@@ -116,7 +116,7 @@ public class NewMouseDrag : MonoBehaviour
 					if (selected.tag == "Wheal") {
 						gridHeight = whealHeight;
 					} else if (selected.tag == "RedThing") {
-						FireExt.inst.foaming = true;
+						FireExtinguisherScript.inst.foaming = true;
 						gridHeight = RedThingHeight;
 						rb.isKinematic = true;
 						rb.rotation = Quaternion.LookRotation(hit.point - rb.position) * Quaternion.Euler(temp);
@@ -136,7 +136,7 @@ public class NewMouseDrag : MonoBehaviour
         {
             if (selected.tag == "RedThing")
             {
-				FireExt.inst.foaming = false;
+				FireExtinguisherScript.inst.foaming = false;
 				selected.GetComponent<Rigidbody>().isKinematic = false  ;
             } if (selected.tag == "Gas" && ConnectGasHandle.inst.connected == false) {
 				selected.GetComponent<Rigidbody>().isKinematic = false;

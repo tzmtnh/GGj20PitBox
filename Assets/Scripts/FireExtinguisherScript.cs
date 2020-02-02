@@ -5,9 +5,18 @@ using UnityEngine;
 
 public class FireExtinguisherScript : MonoBehaviour
 {
-    private bool _isFixing = false;
+	public static FireExtinguisherScript inst;
+
+	public bool foaming = false;
+	public ParticleSystem foam;
+
+	private bool _isFixing = false;
     [SerializeField]
     private float _extinguishRate = 20;
+
+	Rigidbody _rigidbody;
+	Vector3 _initPos;
+	Quaternion _initRot;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,8 +27,9 @@ public class FireExtinguisherScript : MonoBehaviour
 
         if (other.tag == "KillTag")
         {
-            transform.position=new Vector3(3,0.5f,-3);
-            GetComponent<Rigidbody>().velocity=Vector3.zero;
+			_rigidbody.position = _initPos;
+			_rigidbody.rotation = _initRot;
+			_rigidbody.velocity = new Vector3();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -30,9 +40,18 @@ public class FireExtinguisherScript : MonoBehaviour
         }
     }
 
-    private void Update()
+	void Awake() {
+		inst = this;
+		_rigidbody = GetComponent<Rigidbody>();
+		_initPos = transform.position;
+		_initRot = transform.rotation;
+	}
+
+	private void Update()
     {
-        if (_isFixing)
+		Car.ToggleEmission(foam, foaming);
+
+		if (_isFixing)
         {
             Simulation.SimulationInst.EngineRepair(_extinguishRate*Time.deltaTime);
         }

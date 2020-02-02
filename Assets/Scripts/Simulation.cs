@@ -188,7 +188,7 @@ public class Simulation : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("pois");
+            //Debug.Log("pois");
             _timerTime--;
             UIManager.UIManagerInstance.UpdateStartTimer(_timerTime.ToString());
             if (_timerTime == 0)
