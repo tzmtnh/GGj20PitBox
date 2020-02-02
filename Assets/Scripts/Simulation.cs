@@ -46,7 +46,6 @@ public class Simulation : MonoBehaviour
     private float _wheelsWeight = 4;
 
     public float _wheelsFix;
-    public float _engineFix;
 
     private float _fuelIncrement;
     private float _wheelsIncrement;
@@ -136,12 +135,14 @@ public class Simulation : MonoBehaviour
         _wantsStop = state;
         if (_pitStop)
         {
+            UIManager.UIManagerInstance.UpdateInformationText(ETextState.Running);
             _pitStop = false;
             _wantsStop = false;
             _mouseDrag.Reset(); 
             _car.ExitPit();
+            return;
         }
-
+        UIManager.UIManagerInstance.UpdateInformationText(ETextState.Parking);
     }
 
     void Awake()
@@ -225,9 +226,9 @@ public class Simulation : MonoBehaviour
                 _distanceTraveled -= _raceDistance;
                 if (_wantsStop)
                 {
+                    UIManager.UIManagerInstance.UpdateInformationText(ETextState.Stopped);
                     _pitStop = true;
                     _wheelsFix = (_initialValue - _wheelDurability) / 4;
-                    _engineFix = -8;
                     _wantsStop = false;
                     _car.EnterPit();
                 }
@@ -295,10 +296,10 @@ public class Simulation : MonoBehaviour
             UIManager.UIManagerInstance.UpdateLaps(_lapsElapsed+1,_totalLaps);
             _distanceTraveled -= _raceDistance;
             if (_wantsStop)
-            { 
+            {
+                UIManager.UIManagerInstance.UpdateInformationText(ETextState.Stopped);
                 _pitStop = true;
                 _wheelsFix = (_initialValue - _wheelDurability) / 4;
-                _engineFix = -8;
                 _wantsStop = false;
                 _car.EnterPit();
             }
