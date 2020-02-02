@@ -80,7 +80,8 @@ public class NewMouseDrag : MonoBehaviour
                                 Instantiate(wheal, hit.transform.position, wheal.transform.rotation).GetComponent<WhealStatus>()
                                     .theyAreNew = false;
                                 AudioManager.AuidoManagerInstance.PlayOneShotRatchetAudio(1);
-                            }
+								Simulation.SimulationInst.WheelRemoved();
+							}
                         }
                     }
                     else if (hit.transform.tag == "WhealBox")

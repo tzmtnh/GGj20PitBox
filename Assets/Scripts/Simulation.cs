@@ -16,11 +16,10 @@ public class Simulation : MonoBehaviour
     private float _wheelDurability;
     private float _fuelAmount;
     private float _engineHeat;
-    [SerializeField] 
-    private int _initialValue = 100;
+    [SerializeField] private int _initialValue = 100;
     private int _initialValueEngine = 0;
-    [SerializeField] 
-    private float _decayRate = 5;
+    [SerializeField]  private float _wheelsDecayRate = 2;
+	[SerializeField] private float _fuelDecayRate = 3;
 
     [SerializeField] private float _engineLowHeatingRate = 7;
     [SerializeField] private float _engineMedHeatingRate = 11;
@@ -46,7 +45,7 @@ public class Simulation : MonoBehaviour
     [SerializeField] 
     private float _wheelsWeight = 4;
 
-    public float _wheelsFix;
+    public float _wheelsFix = 25;
 
     private float _fuelIncrement;
     private float _wheelsIncrement;
@@ -101,13 +100,32 @@ public class Simulation : MonoBehaviour
         _gameRunning = State;
     }
 
+	int _numRemovedWheels;
+	public void WheelRemoved() {
+		if (!_pitStop) return;
+
+		_numRemovedWheels++;
+		if (_numRemovedWheels > 4) {
+			_numRemovedWheels = 4;
+		}
+
+		_wheelDurability = Mathf.Min(_wheelDurability, _initialValue * (4f - _numRemovedWheels) / 4f);
+
+		UIManager.UIManagerInstance.UpdateWheels(_wheelDurability);
+	}
+
     public void WheelRepair()
     {
         if (!_pitStop)
         {
             return;
         }
-        _wheelDurability += _wheelsFix;
+
+		_numRemovedWheels--;
+		if (_numRemovedWheels < 0)
+			_numRemovedWheels = 0;
+
+		_wheelDurability += _wheelsFix;
         if (_wheelDurability >= _initialValue)
             _wheelDurability = _initialValue;
 
@@ -271,6 +289,8 @@ public class Simulation : MonoBehaviour
             return;
         }
 
+		_numRemovedWheels = 0;
+
         if (_fuelAmount <= 0 || _engineHeat >= _initialValue)
         {
             _speed -= _decreasingTime * Time.deltaTime;
@@ -295,7 +315,7 @@ public class Simulation : MonoBehaviour
                 float startParam = 1 - Mathf.Clamp(wantedDuration / Car.inst.animationDuration, 0, 1);
 				Car.inst.EnterPit(startParam);
                 _isStopping = true;
-                _wheelsFix = (_initialValue - _wheelDurability) / 4;
+                //_wheelsFix = (_initialValue - _wheelDurability) / 4;
                 _wantsStop = false;
             }
 
@@ -312,7 +332,7 @@ public class Simulation : MonoBehaviour
             }
             else
             {
-                _wheelDurability -= _decayRate * Time.deltaTime;
+                _wheelDurability -= _wheelsDecayRate * Time.deltaTime;
 
                 UIManager.UIManagerInstance.UpdateWheels(_wheelDurability);
             }
@@ -323,7 +343,7 @@ public class Simulation : MonoBehaviour
             }
             else
             {
-                _fuelAmount -= _decayRate * Time.deltaTime;
+                _fuelAmount -= _fuelDecayRate * Time.deltaTime;
 
                 UIManager.UIManagerInstance.UpdateFuel(_fuelAmount);
             }
@@ -356,7 +376,7 @@ public class Simulation : MonoBehaviour
         }
         else
         {
-            _wheelDurability -= _decayRate * Time.deltaTime;
+            _wheelDurability -= _wheelsDecayRate * Time.deltaTime;
 
             UIManager.UIManagerInstance.UpdateWheels(_wheelDurability);
         }
@@ -367,7 +387,7 @@ public class Simulation : MonoBehaviour
         }
         else
         {
-            _fuelAmount -= _decayRate * Time.deltaTime;
+            _fuelAmount -= _fuelDecayRate * Time.deltaTime;
 
             UIManager.UIManagerInstance.UpdateFuel(_fuelAmount);
         }
@@ -408,7 +428,7 @@ public class Simulation : MonoBehaviour
             float startParam = 1 - Mathf.Clamp(wantedDuration / Car.inst.animationDuration, 0, 1);
 			Car.inst.EnterPit(startParam);
             _isStopping = true;
-            _wheelsFix = (_initialValue - _wheelDurability) / 4;
+            //_wheelsFix = (_initialValue - _wheelDurability) / 4;
             _wantsStop = false;
         }
         if (_distanceTraveled >= _raceDistance)

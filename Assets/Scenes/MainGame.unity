@@ -2307,7 +2307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialValue: 100
-  _decayRate: 5
+  _decayRate: 2
   _engineLowHeatingRate: 7
   _engineMedHeatingRate: 11
   _engineHighHeatingRate: 15
@@ -2320,7 +2320,7 @@ MonoBehaviour:
   _raceDistance: 900
   _fuelWeight: 1
   _wheelsWeight: 4
-  _wheelsFix: 0
+  _wheelsFix: 25
   _decreasingTime: 100
   _totalLaps: 30
   _timeDilation: 1
