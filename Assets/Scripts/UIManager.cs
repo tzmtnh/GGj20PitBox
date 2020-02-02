@@ -97,7 +97,9 @@ public class UIManager : MonoBehaviour
         {
             _uiManagerInst = this;
         }
-    }
+
+		_lastCarPos = _carDisplay.rectTransform.localPosition;
+	}
 
     private void Start()
     {
@@ -183,4 +185,23 @@ public class UIManager : MonoBehaviour
     {
         _startTimer.text = text;
     }
+
+	Vector3 _lastCarPos;
+	void UpdateCarArrowDirection() {
+		Vector3 carPos = _carDisplay.rectTransform.localPosition;
+		Vector3 carDir = (carPos - _lastCarPos).normalized;
+		if (carDir.sqrMagnitude < 0.5f) return;
+		_lastCarPos = carPos;
+
+		float angle = Vector3.Angle(Vector3.up, carDir);
+		if (Vector3.Cross(Vector3.up, carDir).z < 0) {
+			angle = -angle;
+		}
+		_carDisplay.rectTransform.localRotation = Quaternion.Euler(0, 0, angle);
+
+	}
+
+	void Update() {
+		UpdateCarArrowDirection();
+	}
 }
