@@ -73,7 +73,7 @@ public class ConnectGasHandle : MonoBehaviour
     }
 
     void Update() {
-        if (connected) {
+        if (connected && broken == false) {
 			Simulation.SimulationInst.FuelRefil(_fuelPerSecond*Time.deltaTime);
         }
 
