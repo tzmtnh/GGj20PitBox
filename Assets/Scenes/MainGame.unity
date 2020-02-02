@@ -136,6 +136,11 @@ PrefabInstance:
       propertyPath: outSpline
       value: 
       objectReference: {fileID: 794595294}
+    - target: {fileID: 4636523589992115210, guid: 3c9053f59e4191644ad068ea183ecea5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6101909947087901035, guid: 3c9053f59e4191644ad068ea183ecea5,
         type: 3}
       propertyPath: m_Name
@@ -196,20 +201,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8033911149271719411, guid: 3c9053f59e4191644ad068ea183ecea5,
+        type: 3}
+      propertyPath: inSpline
+      value: 
+      objectReference: {fileID: 1445993516}
+    - target: {fileID: 8033911149271719411, guid: 3c9053f59e4191644ad068ea183ecea5,
+        type: 3}
+      propertyPath: outSpline
+      value: 
+      objectReference: {fileID: 794595294}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
---- !u!114 &105068628 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 105068628, guid: 3c9053f59e4191644ad068ea183ecea5,
-    type: 3}
-  m_PrefabInstance: {fileID: 105068626}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf41e50c319a67d479e61cc6632f0c32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &166519674
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +661,7 @@ Transform:
   - {fileID: 1475204446}
   - {fileID: 1321448785}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1002337327
 PrefabInstance:
@@ -760,7 +763,7 @@ PrefabInstance:
     - target: {fileID: 7045648535608722310, guid: 54add67304144a94393874252fe8e1b7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7045648535608722310, guid: 54add67304144a94393874252fe8e1b7,
         type: 3}
@@ -1440,8 +1443,8 @@ MonoBehaviour:
   _engineHighHeatingRate: 15
   _engineMedThreshold: 50
   _engineHighThreshold: 75
-  __enginePitCoolingRate: 3
-  __engineSlowPitCoolingRate: 2
+  _enginePitCoolingRate: 3
+  _engineSlowPitCoolingRate: 2
   _baseSpeed: 15
   _topSpeed: 300
   _raceDistance: 900
@@ -1451,7 +1454,7 @@ MonoBehaviour:
   _decreasingTime: 100
   _totalLaps: 30
   _timeDilation: 1
-  _car: {fileID: 105068628}
+  _car: {fileID: 0}
   _mouseDrag: {fileID: 1574371042}
   _stopDistance: 700
   _startTime: 5

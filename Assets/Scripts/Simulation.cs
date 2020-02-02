@@ -68,7 +68,6 @@ public class Simulation : MonoBehaviour
     [SerializeField]
     private float _timeDilation = 1;
 
-    [SerializeField] private Car _car;
     [SerializeField] private NewMouseDrag _mouseDrag;
 
     [SerializeField] private float _stopDistance=700;
@@ -147,7 +146,7 @@ public class Simulation : MonoBehaviour
             _pitStop = false;
             _wantsStop = false;
             _mouseDrag.Reset(); 
-            _car.ExitPit();
+            Car.inst.ExitPit();
             return;
         }
         UIManager.UIManagerInstance.UpdateInformationText(ETextState.Parking);
@@ -268,14 +267,14 @@ public class Simulation : MonoBehaviour
             if (_wantsStop && _distanceTraveled >= _stopDistance)
             {
                 float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
-                if (wantedDuration > _car.animationDuration || wantedDuration < _car.animationDuration/4)
+                if (wantedDuration > Car.inst.animationDuration || wantedDuration < Car.inst.animationDuration/4)
                 {
                     UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);
                     return;
                 }
 
-                float startParam = 1 - Mathf.Clamp(wantedDuration / _car.animationDuration, 0, 1);
-                _car.EnterPit(startParam);
+                float startParam = 1 - Mathf.Clamp(wantedDuration / Car.inst.animationDuration, 0, 1);
+				Car.inst.EnterPit(startParam);
                 _isStopping = true;
                 _wheelsFix = (_initialValue - _wheelDurability) / 4;
                 _wantsStop = false;
@@ -381,14 +380,14 @@ public class Simulation : MonoBehaviour
         if (_wantsStop && _distanceTraveled >= _stopDistance)
         {
             float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
-            if (wantedDuration > _car.animationDuration||wantedDuration < _car.animationDuration/10)
+            if (wantedDuration > Car.inst.animationDuration||wantedDuration < Car.inst.animationDuration/10)
             {
                 UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);
                 return;
             }
 
-            float startParam = 1 - Mathf.Clamp(wantedDuration / _car.animationDuration, 0, 1);
-            _car.EnterPit(startParam);
+            float startParam = 1 - Mathf.Clamp(wantedDuration / Car.inst.animationDuration, 0, 1);
+			Car.inst.EnterPit(startParam);
             _isStopping = true;
             _wheelsFix = (_initialValue - _wheelDurability) / 4;
             _wantsStop = false;
