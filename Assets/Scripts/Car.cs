@@ -159,6 +159,18 @@ public class Car : MonoBehaviour
 		_chassis.localRotation = Quaternion.Euler(0, angle, 0);
 	}
 
+	public float passByTime = 5;
+	float _passByTimer;
+	void UpdateEnemy() {
+		if (isPlayer) return;
+
+		_passByTimer -= Time.deltaTime;
+		if (_passByTimer > 0) return;
+
+		_passByTimer = passByTime;
+		PassBy();
+	}
+
     void Awake()
     {
 		if (isPlayer) {
@@ -171,6 +183,7 @@ public class Car : MonoBehaviour
         _rearWheels = _transform.Find("RearWheels");
 		_fireLight = fire.GetComponentInChildren<Light>();
 		_chassis = _transform.Find("Chassis");
+		_passByTimer = passByTime * Random.Range(0.7f, 1.7f);
 
 		Renderer[] renderers = GetComponentsInChildren<Renderer>();
 		foreach (Renderer r in renderers) {
@@ -186,5 +199,6 @@ public class Car : MonoBehaviour
 		UpdateChassis();
 		UpdateFire();
 		UpdateSparks();
+		UpdateEnemy();
 	}
 }
