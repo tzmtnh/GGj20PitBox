@@ -196,6 +196,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8033911149271719411, guid: 3c9053f59e4191644ad068ea183ecea5,
+        type: 3}
+      propertyPath: inSpline
+      value: 
+      objectReference: {fileID: 1445993516}
+    - target: {fileID: 8033911149271719411, guid: 3c9053f59e4191644ad068ea183ecea5,
+        type: 3}
+      propertyPath: outSpline
+      value: 
+      objectReference: {fileID: 794595294}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
 --- !u!1 &105068627 stripped
@@ -1474,7 +1484,7 @@ Transform:
   - {fileID: 1771185868}
   - {fileID: 1198741597}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1198741596
 GameObject:
@@ -1521,7 +1531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fireExtinguisherAudioSource: {fileID: 1002337329}
   _fuelingAudioSource: {fileID: 105068631}
-  _electricRatchetAudioSource: {fileID: 0}
+  _electricRatchetAudioSource: {fileID: 105068634}
   _carEngineAudioSource: {fileID: 105068632}
   _engineFireAudioSource: {fileID: 105068630}
   _electrictRatchetAudioClips:
