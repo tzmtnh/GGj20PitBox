@@ -86,7 +86,7 @@ public class NewMouseDrag : MonoBehaviour
                     }
                     else if (hit.transform.tag == "WhealBox")
                     {
-                        Instantiate(wheal, hit.transform.position+hit.transform.forward*3, wheal.transform.rotation).GetComponent<WhealStatus>()
+                        Instantiate(wheal, hit.point, wheal.transform.rotation).GetComponent<WhealStatus>()
                             .theyAreNew = true;
                     }
                 }

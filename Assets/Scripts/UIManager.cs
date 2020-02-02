@@ -4,6 +4,11 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ETextState
+{
+    Running,Parking,Stopped,Empty
+};
+
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Slider _wheelsSlider;
@@ -12,6 +17,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Text _lapsText;
     [SerializeField] private Text _timerText;
+    [SerializeField] private Text _informationText;
 
     [SerializeField] private Image _carDisplay;
 
@@ -24,6 +30,25 @@ public class UIManager : MonoBehaviour
     public static UIManager UIManagerInstance
     {
         get { return _uiManagerInst; }
+    }
+
+    public void UpdateInformationText(ETextState state)
+    {
+        switch (state)
+        {
+            case ETextState.Parking:
+                _timerText.text = "The Car is Coming";
+                break;
+            case ETextState.Running:
+                _timerText.text = "Press \"Space\" to Bring in the Car";
+                break;
+            case ETextState.Stopped:
+                _timerText.text = "Press \"Space\" to Send out the Car";
+                break;
+            case ETextState.Empty:
+                _timerText.text = "";
+                break;
+        }
     }
 
     public void FindPoint(float completionPercent)
