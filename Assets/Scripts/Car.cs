@@ -32,6 +32,7 @@ public class Car : MonoBehaviour
 	Transform _steer;
 	Transform _frontWheels;
 	Transform _rearWheels;
+	Transform _chassis;
 
 	Vector3 _lastPos;
 	bool _initialized = false;
@@ -112,11 +113,6 @@ public class Car : MonoBehaviour
 		_lastPos = pos;
 	}
 
-	void UpdateDust() {
-		var emission = dust.emission;
-		emission.rateOverTimeMultiplier = Mathf.Min(_velocity.magnitude, 1) * 50;
-	}
-
 	void UpdateFire() {
 		var emission = fire.emission;
 		emission.rateOverTimeMultiplier = fireStrength * 50;
@@ -145,6 +141,15 @@ public class Car : MonoBehaviour
 		ToggleEmission(sparks[3], sparksRearLeft);
 	}
 
+	void UpdateChassis() {
+		float t = Time.time;
+		float z = 0.005f * Mathf.Sin(37 * t);
+		_chassis.localPosition = new Vector3(0, 0, z);
+
+		float angle = 0.5f * Mathf.Sin(11 * t); ;
+		_chassis.localRotation = Quaternion.Euler(0, angle, 0);
+	}
+
     void Awake()
     {
 		inst = this;
@@ -153,13 +158,14 @@ public class Car : MonoBehaviour
         _frontWheels = _steer.Find("FrontWheels");
         _rearWheels = _transform.Find("RearWheels");
 		_fireLight = fire.GetComponentInChildren<Light>();
-    }
+		_chassis = _transform.Find("Chassis");
+	}
 
 	void Update() {
         if (!Simulation.SimulationInst.IsGameRunning()) return;
 
 		UpdateWheels();
-		UpdateDust();
+		UpdateChassis();
 		UpdateFire();
 		UpdateSparks();
 	}
