@@ -10,6 +10,7 @@ public class Car : MonoBehaviour
 	public bool isPlayer = true;
 	public Color color = Color.red;
 	public float animationDuration = 3;
+	public float passByTime = 5;
 	[Range(0, 1)] public float fireStrength = 0;
 
 	[Header("Particles")]
@@ -26,6 +27,7 @@ public class Car : MonoBehaviour
 	public float speed { get { return _velocity.magnitude; } }
 
 	Light _fireLight;
+	float _passByTimer;
 
 	Transform _transform;
 	Transform _steer;
@@ -159,8 +161,6 @@ public class Car : MonoBehaviour
 		_chassis.localRotation = Quaternion.Euler(0, angle, 0);
 	}
 
-	public float passByTime = 5;
-	float _passByTimer;
 	void UpdateEnemy() {
 		if (isPlayer) return;
 

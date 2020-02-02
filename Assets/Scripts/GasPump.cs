@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GasPump : MonoBehaviour
 {
+	public ParticleSystem gasolin;
 	public Transform[] bones;
 
 	Transform _handle;
@@ -98,7 +99,8 @@ public class GasPump : MonoBehaviour
 			if (dist > 4) {
 				ConnectGasHandle.inst.broken = true;
 				_hoseRoot.GetComponent<Rigidbody>().isKinematic = false;
-				Debug.LogWarning("Broken!");
+				gasolin.Play();
+				//Debug.LogWarning("Broken!");
 			}
 		}
 	}
