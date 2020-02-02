@@ -381,7 +381,7 @@ public class Simulation : MonoBehaviour
         if (_wantsStop && _distanceTraveled >= _stopDistance)
         {
             float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
-            if (wantedDuration > _car.animationDuration||wantedDuration < _car.animationDuration/4)
+            if (wantedDuration > _car.animationDuration||wantedDuration < _car.animationDuration/10)
             {
                 UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);
                 return;
