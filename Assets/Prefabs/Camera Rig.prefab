@@ -264,6 +264,6 @@ MonoBehaviour:
   initOrbit: 190
   initPitch: 25
   sensitivity: 2
-  drag: 0.1
+  drag: 0.2
   zoomRange: {x: 2, y: 7, z: 4}
   zoomSensitivity: 10
