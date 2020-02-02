@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.45131558, g: 0.5009525, b: 0.57311296, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -610,6 +610,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 105068628, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
+      propertyPath: inSpline
+      value: 
+      objectReference: {fileID: 355326886}
+    - target: {fileID: 105068628, guid: 3c9053f59e4191644ad068ea183ecea5, type: 3}
+      propertyPath: outSpline
+      value: 
+      objectReference: {fileID: 135176575}
     - target: {fileID: 712788285621859338, guid: 3c9053f59e4191644ad068ea183ecea5,
         type: 3}
       propertyPath: inSpline
