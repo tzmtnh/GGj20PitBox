@@ -71,9 +71,13 @@ public class Simulation : MonoBehaviour
     [SerializeField] private Car _car;
     [SerializeField] private NewMouseDrag _mouseDrag;
 
+    [SerializeField] private float _stopDistance=700;
+
     [SerializeField]
     private int _startTime = 5;
     private int _timerTime;
+
+    private bool _isStopping = false;
 
     public bool EngineCanCoolOff()
     {
@@ -208,7 +212,10 @@ public class Simulation : MonoBehaviour
         {
             return;
         }
-
+        if (!_gameStarted)
+        {
+            return;
+        }
         Car.inst.fireStrength = ((_engineHeat * 2) - 100) / 100;
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -216,13 +223,22 @@ public class Simulation : MonoBehaviour
             PitStopCall(!_pitStop);
         }
 
-        if (!_gameStarted)
-        {
-            return;
-        }
-
         _timeElapsed += _timeDilation * Time.deltaTime;
         UIManager.UIManagerInstance.UpdateTimer(_timeElapsed);
+
+        if (_isStopping)
+        {
+            _distanceTraveled += _speed * Time.deltaTime;
+            if (_distanceTraveled >= _raceDistance)
+            {
+                UIManager.UIManagerInstance.UpdateInformationText(ETextState.Stopped);
+                _pitStop = true;
+                _isStopping = false;
+                _distanceTraveled = 0;
+            }
+            UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);
+            return;
+        }
 
         if (_pitStop)
         {
@@ -249,17 +265,21 @@ public class Simulation : MonoBehaviour
 
             _distanceTraveled += _speed * Time.deltaTime;
 
+            if (_wantsStop && _stopDistance+50>=_distanceTraveled&&_distanceTraveled >= _stopDistance)
+            {
+                _isStopping = true;
+                _wheelsFix = (_initialValue - _wheelDurability) / 4;
+                _wantsStop = false;
+                float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
+                float startParam = 1 -Mathf.Clamp(wantedDuration / _car.animationDuration,0,1);
+                _car.EnterPit(startParam);
+                _car.EnterPit();
+            }
+
             if (_distanceTraveled > _raceDistance)
             {
                 _distanceTraveled -= _raceDistance;
-                if (_wantsStop)
-                {
-                    UIManager.UIManagerInstance.UpdateInformationText(ETextState.Stopped);
-                    _pitStop = true;
-                    _wheelsFix = (_initialValue - _wheelDurability) / 4;
-                    _wantsStop = false;
-                    _car.EnterPit();
-                }
+                
             }
 
             UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);
@@ -312,6 +332,15 @@ public class Simulation : MonoBehaviour
         _speed = _baseSpeed + ((1 / (_fuelAmount + 5)) * _fuelIncrement) + ((_wheelDurability / _initialValue) * _wheelsIncrement);
         
         _distanceTraveled += _speed * Time.deltaTime;
+        if (_wantsStop && _stopDistance + 50 >= _distanceTraveled && _distanceTraveled >= _stopDistance)
+        {
+            _isStopping = true;
+            _wheelsFix = (_initialValue - _wheelDurability) / 4;
+            _wantsStop = false;
+            float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
+            float startParam = 1 - Mathf.Clamp(wantedDuration / _car.animationDuration, 0, 1);
+            _car.EnterPit(startParam);
+        }
         if (_distanceTraveled >= _raceDistance)
         {
             _lapsElapsed++;
@@ -323,14 +352,7 @@ public class Simulation : MonoBehaviour
 
             UIManager.UIManagerInstance.UpdateLaps(_lapsElapsed+1,_totalLaps);
             _distanceTraveled -= _raceDistance;
-            if (_wantsStop)
-            {
-                UIManager.UIManagerInstance.UpdateInformationText(ETextState.Stopped);
-                _pitStop = true;
-                _wheelsFix = (_initialValue - _wheelDurability) / 4;
-                _wantsStop = false;
-                _car.EnterPit();
-            }
+            
         }
 
         UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);

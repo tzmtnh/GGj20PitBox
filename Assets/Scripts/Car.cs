@@ -44,24 +44,26 @@ public class Car : MonoBehaviour
 
 	const float WHEEL_RADIUS = 0.35f;
 
-	public void EnterPit() {
-		FollowSpline(animationDuration, inSpline);
+	public void EnterPit(float startParam = 0) {
+		FollowSpline(animationDuration, startParam, inSpline);
 	}
 
 	public void ExitPit() {
-		FollowSpline(animationDuration, outSpline);
+		FollowSpline(animationDuration, 0, outSpline);
 	}
 
-	void FollowSpline(float duration, BezierSegment segment) {
+	void FollowSpline(float duration, float startParam, BezierSegment segment) {
 		if (_followSplineCo != null) {
 			StopCoroutine(_followSplineCo);
 		}
-		_followSplineCo = StartCoroutine(FollowSplineCo(duration, segment));
+		_followSplineCo = StartCoroutine(FollowSplineCo(duration, startParam, segment));
 	}
 
 	Coroutine _followSplineCo = null;
-	IEnumerator FollowSplineCo(float duration, BezierSegment segment) {
-		float timer = 0;
+	IEnumerator FollowSplineCo(float duration, float startParam, BezierSegment segment)
+    {
+        duration *= (1f - startParam);
+		float timer = duration * startParam;
 		while (timer < duration) {
 			float t = Mathf.SmoothStep(0, 1, timer / duration);
 			_transform.position = segment.getPos(t);
