@@ -170,6 +170,7 @@ public class UIManager : MonoBehaviour
         string seconds = Mathf.Floor(elapsedTime % 60).ToString("00");
 
         _timerText.text = minutes + ":" + seconds;
+        PersistScript.PersistScriptInstance.SetTime(_timerText.text);
     }
 
 

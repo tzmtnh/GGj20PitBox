@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Simulation : MonoBehaviour
 {
@@ -78,9 +79,11 @@ public class Simulation : MonoBehaviour
 
     private bool _isStopping = false;
 
+    private bool _canRepairEngine = false;
+
     public bool EngineCanCoolOff()
     {
-        return _engineHeat > _engineMedThreshold;
+        return _canRepairEngine;
     }
 
     public bool HasGameStarted()
@@ -251,14 +254,17 @@ public class Simulation : MonoBehaviour
         {
             if (_engineHeat >= _engineHighThreshold)
             {
+                _canRepairEngine = true;
                 return;
             }
             else if(_engineHeat >=_engineMedThreshold)
             {
+                _canRepairEngine = true;
                 EngineRepair(_engineSlowPitCoolingRate*Time.deltaTime);
             }
             else
             {
+                _canRepairEngine = false;
                 EngineRepair(_enginePitCoolingRate*Time.deltaTime);
             }
 
@@ -406,6 +412,7 @@ public class Simulation : MonoBehaviour
             if (_lapsElapsed == _totalLaps)
             {
                 _gameRunning = false;
+                SceneManager.LoadScene(2);
                 return;
             }
 
