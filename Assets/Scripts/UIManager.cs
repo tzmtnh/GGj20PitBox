@@ -169,13 +169,13 @@ public class UIManager : MonoBehaviour
         string minutes = Mathf.Floor(elapsedTime / 60).ToString("00");
         string seconds = Mathf.Floor(elapsedTime % 60).ToString("00");
 
-        _timerText.text = minutes + " : " + seconds;
+        _timerText.text = minutes + ":" + seconds;
     }
 
 
     public void UpdateLaps(int currentLap,int lapTotal)
     {
-        _lapsText.text = currentLap + "/" + lapTotal;
+        _lapsText.text = "Lap/n" + currentLap + "/" + lapTotal;
     }
 
     public void UpdateStartTimer(string text)
