@@ -217,6 +217,14 @@ public class Simulation : MonoBehaviour
             return;
         }
         Car.inst.fireStrength = ((_engineHeat * 2) - 100) / 100;
+        if (Car.inst.fireStrength > 100 && !AudioManager.AuidoManagerInstance.IsPlayingFire())
+        {
+            AudioManager.AuidoManagerInstance.PlayingEngineFireAudio(true,Mathf.Clamp(Car.inst.fireStrength+0.5f,0,1));
+        }
+        else if (Car.inst.fireStrength<=100 && AudioManager.AuidoManagerInstance.IsPlayingFire())
+        {
+            AudioManager.AuidoManagerInstance.PlayingEngineFireAudio(false,1);
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {

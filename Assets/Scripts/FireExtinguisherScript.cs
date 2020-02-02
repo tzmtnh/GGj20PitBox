@@ -23,6 +23,7 @@ public class FireExtinguisherScript : MonoBehaviour
         if (other.tag == "CarEngineArea" && Simulation.SimulationInst.EngineCanCoolOff())
         {
             _isFixing = true;
+           AudioManager.AuidoManagerInstance.PlayingFireExtinguisherAudio(true,1);
         }
 
         if (other.tag == "KillTag")
@@ -37,6 +38,7 @@ public class FireExtinguisherScript : MonoBehaviour
         if (other.tag == "CarEngineArea")
         {
             _isFixing = false;
+            AudioManager.AuidoManagerInstance.PlayingFireExtinguisherAudio(false, 1);
         }
     }
 

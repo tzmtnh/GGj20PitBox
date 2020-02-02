@@ -79,6 +79,7 @@ public class NewMouseDrag : MonoBehaviour
                                 hit.transform.gameObject.SetActive(false);
                                 Instantiate(wheal, hit.transform.position, wheal.transform.rotation).GetComponent<WhealStatus>()
                                     .theyAreNew = false;
+                                AudioManager.AuidoManagerInstance.PlayOneShotRatchetAudio(1);
                             }
                         }
                     }

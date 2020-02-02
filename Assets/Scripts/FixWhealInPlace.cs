@@ -22,6 +22,7 @@ public class FixWhealInPlace : MonoBehaviour
                     Destroy(other.gameObject);
                     transform.GetChild(0).gameObject.SetActive(true);
                     itsOk = false;
+                    AudioManager.AuidoManagerInstance.PlayOneShotRatchetAudio(1);
                 }
             }
         }

@@ -62,15 +62,16 @@ public class Car : MonoBehaviour
 	Coroutine _followSplineCo = null;
 	IEnumerator FollowSplineCo(float duration, float startParam, BezierSegment segment)
     {
-		float timer = duration * startParam;
+        AudioManager.AuidoManagerInstance.PlayingCarEngineAudio(true, 1);
+        float timer = duration * startParam;
 		while (timer < duration) {
 			float t = Mathf.SmoothStep(0, 1, timer / duration);
 			_transform.position = segment.getPos(t);
 			yield return null;
 			timer += Time.deltaTime;
 		}
-
-		_transform.position = segment.getPos(1);
+        AudioManager.AuidoManagerInstance.PlayingCarEngineAudio(false, 1);
+        _transform.position = segment.getPos(1);
 		_followSplineCo = null;
 	}
 

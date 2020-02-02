@@ -35,6 +35,8 @@ public class ConnectGasHandle : MonoBehaviour
         _connected = true;
 		_canConnect = false;
 
+        AudioManager.AuidoManagerInstance.PlayingFuelingAudio(true,1);
+
 	}
 
 	void OnTriggerExit(Collider other) {
@@ -43,9 +45,10 @@ public class ConnectGasHandle : MonoBehaviour
 
 		other.GetComponent<Rigidbody>().isKinematic = false;
 		_connected = false;
-	}
+        AudioManager.AuidoManagerInstance.PlayingFuelingAudio(false, 1);
+    }
 
-	void Update() {
+    void Update() {
         if (_connected)
         {
 			Simulation.SimulationInst.FuelRefil(_fuelPerSecond*Time.deltaTime);
