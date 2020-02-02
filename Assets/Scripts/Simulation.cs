@@ -265,14 +265,20 @@ public class Simulation : MonoBehaviour
 
             _distanceTraveled += _speed * Time.deltaTime;
 
-            if (_wantsStop && _stopDistance+50>=_distanceTraveled&&_distanceTraveled >= _stopDistance)
+            if (_wantsStop && _distanceTraveled >= _stopDistance)
             {
+                float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
+                if (wantedDuration > _car.animationDuration || wantedDuration < _car.animationDuration/4)
+                {
+                    UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);
+                    return;
+                }
+
+                float startParam = 1 - Mathf.Clamp(wantedDuration / _car.animationDuration, 0, 1);
+                _car.EnterPit(startParam);
                 _isStopping = true;
                 _wheelsFix = (_initialValue - _wheelDurability) / 4;
                 _wantsStop = false;
-                float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
-                float startParam = 1 - Mathf.Clamp(wantedDuration / _car.animationDuration, 0, 1);
-                _car.EnterPit(startParam);
             }
 
             if (_distanceTraveled > _raceDistance)
@@ -282,7 +288,48 @@ public class Simulation : MonoBehaviour
             }
 
             UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);
+            if (_wheelDurability <= 0)
+            {
+                _wheelDurability = 0;
+            }
+            else
+            {
+                _wheelDurability -= _decayRate * Time.deltaTime;
 
+                UIManager.UIManagerInstance.UpdateWheels(_wheelDurability);
+            }
+
+            if (_fuelAmount <= 0)
+            {
+                _fuelAmount = 0;
+            }
+            else
+            {
+                _fuelAmount -= _decayRate * Time.deltaTime;
+
+                UIManager.UIManagerInstance.UpdateFuel(_fuelAmount);
+            }
+
+            if (_engineHeat >= _initialValue)
+            {
+                _engineHeat = _initialValue;
+            }
+            else
+            {
+                if (_engineHeat >= _engineHighThreshold)
+                {
+                    _engineHeat += _engineHighHeatingRate * Time.deltaTime;
+                }
+                else if (_engineHeat >= _engineMedThreshold)
+                {
+                    _engineHeat += _engineMedHeatingRate * Time.deltaTime;
+                }
+                else
+                {
+                    _engineHeat += _engineLowHeatingRate * Time.deltaTime;
+                }
+                UIManager.UIManagerInstance.UpdateEngine(_engineHeat);
+            }
             return;
         }
         if (_wheelDurability <= 0)
@@ -331,14 +378,20 @@ public class Simulation : MonoBehaviour
         _speed = _baseSpeed + ((1 / (_fuelAmount + 5)) * _fuelIncrement) + ((_wheelDurability / _initialValue) * _wheelsIncrement);
         
         _distanceTraveled += _speed * Time.deltaTime;
-        if (_wantsStop && _stopDistance + 50 >= _distanceTraveled && _distanceTraveled >= _stopDistance)
+        if (_wantsStop && _distanceTraveled >= _stopDistance)
         {
+            float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
+            if (wantedDuration > _car.animationDuration||wantedDuration < _car.animationDuration/4)
+            {
+                UIManager.UIManagerInstance.FindPoint(_distanceTraveled / _raceDistance);
+                return;
+            }
+
+            float startParam = 1 - Mathf.Clamp(wantedDuration / _car.animationDuration, 0, 1);
+            _car.EnterPit(startParam);
             _isStopping = true;
             _wheelsFix = (_initialValue - _wheelDurability) / 4;
             _wantsStop = false;
-            float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
-            float startParam = 1 - Mathf.Clamp(wantedDuration / _car.animationDuration, 0, 1);
-            _car.EnterPit(startParam);
         }
         if (_distanceTraveled >= _raceDistance)
         {
