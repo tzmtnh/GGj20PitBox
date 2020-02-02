@@ -7,6 +7,8 @@ public class ConnectGasHandle : MonoBehaviour
 	public static ConnectGasHandle inst;
 
 	Transform _anchor;
+	Transform _attachment;
+	Transform _oldParent;
 
 	bool _connected = false;
 	public bool connected { get { return _connected; } }
@@ -14,6 +16,20 @@ public class ConnectGasHandle : MonoBehaviour
 	bool _canConnect = true;
     [SerializeField]
     private float _fuelPerSecond = 30;
+
+	public void Attach(Transform t) {
+		if (_attachment != null) return;
+		_attachment = t;
+		_oldParent = t.parent;
+		t.SetParent(_anchor);
+	}
+
+	public void Detach() {
+		if (_attachment == null) return;
+		_attachment.SetParent(_oldParent);
+		_attachment = null;
+		_oldParent = null;
+	}
 
 	void Awake() {
 		inst = this;
@@ -44,6 +60,7 @@ public class ConnectGasHandle : MonoBehaviour
 		if (other.tag != "Gas") return;
 
 		other.GetComponent<Rigidbody>().isKinematic = false;
+
 		_connected = false;
         AudioManager.AuidoManagerInstance.PlayingFuelingAudio(false, 1);
     }

@@ -124,6 +124,7 @@ public class NewMouseDrag : MonoBehaviour
 					} else if (selected.tag == "Gas") {
 						rb.isKinematic = true;
 						gridHeight = gasHeight;
+						ConnectGasHandle.inst.Detach();
 					}
                     
                     rb.position = GetPointOnGrid(ray, gridHeight);
@@ -139,8 +140,12 @@ public class NewMouseDrag : MonoBehaviour
             {
 				FireExtinguisherScript.inst.foaming = false;
 				selected.GetComponent<Rigidbody>().isKinematic = false  ;
-            } if (selected.tag == "Gas" && ConnectGasHandle.inst.connected == false) {
-				selected.GetComponent<Rigidbody>().isKinematic = false;
+            } if (selected.tag == "Gas") {
+				if (ConnectGasHandle.inst.connected) {
+					ConnectGasHandle.inst.Attach(selected.transform);
+				} else {
+					selected.GetComponent<Rigidbody>().isKinematic = false;
+				}
 			}
             //Debug.Log(_ragSpeed);
             selected.GetComponent<Rigidbody>().AddForce(-_ragSpeed*_throwStrength*Time.deltaTime,ForceMode.Force);
