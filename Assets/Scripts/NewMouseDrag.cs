@@ -136,19 +136,23 @@ public class NewMouseDrag : MonoBehaviour
         }
         else if(selected != null && _waitForMouseRelease == false)
         {
-            if (selected.tag == "RedThing")
+			Rigidbody rb = selected.GetComponent<Rigidbody>();
+			if (selected.tag == "RedThing")
             {
 				FireExtinguisherScript.inst.foaming = false;
-				selected.GetComponent<Rigidbody>().isKinematic = false  ;
-            } if (selected.tag == "Gas") {
+				rb.isKinematic = false;
+			} if (selected.tag == "Gas") {
 				if (ConnectGasHandle.inst.connected) {
 					ConnectGasHandle.inst.Attach(selected.transform);
 				} else {
-					selected.GetComponent<Rigidbody>().isKinematic = false;
+					rb.isKinematic = false;
 				}
 			}
-            //Debug.Log(_ragSpeed);
-            selected.GetComponent<Rigidbody>().AddForce(-_ragSpeed*_throwStrength*Time.deltaTime,ForceMode.Force);
+
+			//Debug.Log(_ragSpeed);
+			if (rb.isKinematic == false) {
+				rb.AddForce(-_ragSpeed * _throwStrength * Time.deltaTime, ForceMode.Force);
+			}
 
 			selected = null;
 

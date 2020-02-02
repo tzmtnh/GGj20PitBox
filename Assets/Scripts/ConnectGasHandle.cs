@@ -33,6 +33,12 @@ public class ConnectGasHandle : MonoBehaviour
 	}
 
 	void Awake() {
+		Car car = GetComponentInParent<Car>();
+		if (car.isPlayer == false) {
+			Destroy(this);
+			return;
+		}
+
 		inst = this;
 		_anchor = transform.Find("Anchor");
 	}
