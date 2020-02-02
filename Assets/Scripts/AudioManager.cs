@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -11,7 +13,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _carEngineAudioSource;
     [SerializeField] private AudioSource _engineFireAudioSource;
     [SerializeField] private AudioClip[] _electrictRatchetAudioClips;
+    [SerializeField] private AudioMixer _audioMixer;
 
+    private void Start()
+    {
+        _audioMixer.SetFloat("MusicVol", PersistScript.PersistScriptInstance.GetVolume());
+    }
 
     private static AudioManager _instance;
     public static AudioManager AuidoManagerInstance
