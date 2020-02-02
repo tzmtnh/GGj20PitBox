@@ -11,6 +11,7 @@ TagManager:
   - Gas
   - WheelMesh
   - CarEngineArea
+  - KillTag
   layers:
   - Default
   - TransparentFX

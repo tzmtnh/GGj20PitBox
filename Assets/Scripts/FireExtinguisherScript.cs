@@ -15,6 +15,12 @@ public class FireExtinguisherScript : MonoBehaviour
         {
             _isFixing = true;
         }
+
+        if (other.tag == "KillTag")
+        {
+            transform.position=new Vector3(3,0.5f,-3);
+            GetComponent<Rigidbody>().velocity=Vector3.zero;
+        }
     }
     private void OnTriggerExit(Collider other)
     {
