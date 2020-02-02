@@ -13,8 +13,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _carEngineAudioSource;
     [SerializeField] private AudioSource _engineFireAudioSource;
     [SerializeField] private AudioSource _enginePassiveSound;
+	[SerializeField] private AudioSource _beepSound;
 
-    [SerializeField] private AudioClip[] _electrictRatchetAudioClips;
+	[SerializeField] private AudioClip[] _electrictRatchetAudioClips;
     [SerializeField] private AudioMixer _audioMixer;
 
     private void Start()
@@ -90,6 +91,13 @@ public class AudioManager : MonoBehaviour
             _engineFireAudioSource.Stop();
         }
     }
+
+	public void PlayBeep(float pitch) {
+		Debug.Log(pitch);
+		_beepSound.pitch = pitch;
+		_beepSound.Stop();
+		_beepSound.Play();
+	}
 
     public bool IsPlayingFire()
     {

@@ -216,13 +216,18 @@ public class Simulation : MonoBehaviour
                 UIManager.UIManagerInstance.UpdateStartTimer("GO!");
                 _gameStarted = true;
                 PitStopCall(!_pitStop);
-            }
-            if (_timerTime < 0)
+				AudioManager.AuidoManagerInstance.PlayBeep(2);
+            } else {
+				AudioManager.AuidoManagerInstance.PlayBeep(1);
+			}
+
+			if (_timerTime < 0)
             {
                 UIManager.UIManagerInstance.UpdateStartTimer("");
                     StopAllCoroutines();
             }
-           yield return new WaitForSeconds(1f);
+
+			yield return new WaitForSeconds(1f);
         }
     }
 
