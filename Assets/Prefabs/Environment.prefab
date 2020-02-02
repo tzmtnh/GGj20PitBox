@@ -749,6 +749,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile06
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: c7666734cbfe4d849883a19e423edd3f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7666734cbfe4d849883a19e423edd3f, type: 3}
 --- !u!4 &8390689779690870910 stripped
