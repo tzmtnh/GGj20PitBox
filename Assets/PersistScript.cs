@@ -23,7 +23,7 @@ public class PersistScript : MonoBehaviour
         }
     }
 
-    private float _soundVolume;
+    private float _soundVolume = 100;
 
     public float GetVolume()
     {
