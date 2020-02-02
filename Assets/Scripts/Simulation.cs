@@ -278,6 +278,11 @@ public class Simulation : MonoBehaviour
 
             _distanceTraveled += _speed * Time.deltaTime;
 
+            if (_fuelAmount <= 0 && _speed <= _baseSpeed + 10)
+            {
+                SceneManager.LoadScene(3);
+            }
+
             if (_wantsStop && _distanceTraveled >= _stopDistance)
             {
                 float wantedDuration = (_raceDistance - _distanceTraveled) / _speed;
