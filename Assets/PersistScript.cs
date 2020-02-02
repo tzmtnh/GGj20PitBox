@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ public class PersistScript : MonoBehaviour
         }
     }
 
-    private float _soundVolume = 100;
+    private float _soundVolume = 1;
 
     public float GetVolume()
     {
@@ -33,5 +34,17 @@ public class PersistScript : MonoBehaviour
     public void SetVolume(float volume)
     {
         _soundVolume = volume;
+    }
+
+    private string _time;
+
+    public string GetTime()
+    {
+        return _time;
+    }
+
+    public void SetTime(string time)
+    {
+        _time = time;
     }
 }
