@@ -833,7 +833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2589,7 +2589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 468.5, y: -241.5}
+  m_AnchoredPosition: {x: 458, y: -229}
   m_SizeDelta: {x: 88.52, y: 24.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1433649979
@@ -3181,7 +3181,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 317.5, y: -177.43}
+  m_AnchoredPosition: {x: 313.5, y: -170}
   m_SizeDelta: {x: 165, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1644919366
