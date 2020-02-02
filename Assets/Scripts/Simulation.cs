@@ -217,7 +217,7 @@ public class Simulation : MonoBehaviour
                 _gameStarted = true;
                 PitStopCall(!_pitStop);
 				AudioManager.AuidoManagerInstance.PlayBeep(2);
-            } else {
+            } else if (_timerTime > 0) {
 				AudioManager.AuidoManagerInstance.PlayBeep(1);
 			}
 

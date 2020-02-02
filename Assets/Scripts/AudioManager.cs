@@ -93,7 +93,6 @@ public class AudioManager : MonoBehaviour
     }
 
 	public void PlayBeep(float pitch) {
-		Debug.Log(pitch);
 		_beepSound.pitch = pitch;
 		_beepSound.Stop();
 		_beepSound.Play();
