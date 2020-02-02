@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf41e50c319a67d479e61cc6632f0c32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 1
-  color: {r: 1, g: 0, b: 0, a: 1}
+  isPlayer: 0
+  color: {r: 0, g: 0.9716981, b: 0.0016942092, a: 1}
   animationDuration: 4
   fireStrength: 0
   dust: {fileID: 2975711063003921928}
@@ -38629,7 +38629,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 779a236766161424eafb48192d5b9805,
         type: 3}
       propertyPath: m_Name
-      value: Car
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: -369857146465649132, guid: 779a236766161424eafb48192d5b9805,
         type: 3}
