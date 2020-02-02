@@ -7,6 +7,8 @@ public class Car : MonoBehaviour
 	public static Car inst;
 
 	[Header("Params")]
+	public bool isPlayer = true;
+	public Color color = Color.red;
 	public float animationDuration = 3;
 	[Range(0, 1)] public float fireStrength = 0;
 
@@ -15,12 +17,11 @@ public class Car : MonoBehaviour
 	public ParticleSystem fire;
 	public ParticleSystem[] sparks;
 
-	[Header("Wheels")]
+	[Header("Setup")]
 	public Transform[] wheels;
-
-	[Header("Path")]
 	public BezierSegment inSpline;
 	public BezierSegment outSpline;
+	public Shader hueShader;
 
 	Vector3 _velocity;
 	public Vector3 velocity { get { return _velocity; } }
@@ -158,13 +159,22 @@ public class Car : MonoBehaviour
 
     void Awake()
     {
-		inst = this;
+		if (isPlayer) {
+			inst = this;
+		}
+
         _transform = transform;
         _steer = _transform.Find("Steer");
         _frontWheels = _steer.Find("FrontWheels");
         _rearWheels = _transform.Find("RearWheels");
 		_fireLight = fire.GetComponentInChildren<Light>();
 		_chassis = _transform.Find("Chassis");
+
+		Renderer[] renderers = GetComponentsInChildren<Renderer>();
+		foreach (Renderer r in renderers) {
+			if (r.sharedMaterial.shader != hueShader) continue;
+			r.material.color = color;
+		}
 	}
 
 	void Update() {
