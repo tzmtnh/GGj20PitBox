@@ -176,7 +176,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateLaps(int currentLap,int lapTotal)
     {
-        _lapsText.text = "Lap/n" + currentLap + "/" + lapTotal;
+        _lapsText.text = "Lap\n" + currentLap + "/" + lapTotal;
     }
 
     public void UpdateStartTimer(string text)

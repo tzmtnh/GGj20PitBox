@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Winscreen : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro _text;
+    [SerializeField] private Text _text;
     private void Start()
     {
-        _text.text = "Your time was:/n" +PersistScript.PersistScriptInstance.GetTime();
+        _text.text = "Your time was:\n" +PersistScript.PersistScriptInstance.GetTime();
     }
 
     public void GoToMenu()
